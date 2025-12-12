@@ -1,0 +1,36 @@
+# Project Rules for Cercle Amical
+
+## Nuxt Development Guidelines
+
+### MCP Tools Usage
+When working with Nuxt-related code, always use the available MCP (Model Context Protocol) tools:
+
+1. **Nuxt MCP** - Use for Nuxt framework documentation, modules, and deployment guides:
+   - Use `mcp_nuxt_list_documentation_pages` to find relevant Nuxt documentation
+   - Use `mcp_nuxt_get_documentation_page` to retrieve specific documentation content
+   - Use `mcp_nuxt_list_modules` to search for Nuxt modules
+   - Use `mcp_nuxt_get_module` to get detailed module information
+   - Use `mcp_nuxt_get_getting_started_guide` for setup and installation guidance
+   - Use `mcp_nuxt_list_deploy_providers` and `mcp_nuxt_get_deploy_provider` for deployment information
+
+2. **Nuxt UI MCP** - Use for Nuxt UI component library:
+   - Use `mcp_nuxt-ui_list_components` to browse available UI components
+   - Use `mcp_nuxt-ui_get_component` and `mcp_nuxt-ui_get_component_metadata` to get component details, props, slots, and events
+   - Use `mcp_nuxt-ui_list_composables` to find available composables
+   - Use `mcp_nuxt-ui_search_components_by_category` to find components by category
+   - Use `mcp_nuxt-ui_list_templates` and `mcp_nuxt-ui_get_template` for UI templates
+   - Use `mcp_nuxt-ui_list_examples` and `mcp_nuxt-ui_get_example` for implementation examples
+   - Use `mcp_nuxt-ui_list_documentation_pages` and `mcp_nuxt-ui_get_documentation_page` for UI documentation
+
+3. **Nuxt Content Documentation** - Reference Nuxt Content documentation when working with content:
+   - Check Nuxt Content docs via Nuxt MCP for content management
+   - Use appropriate Nuxt Content APIs and components
+   - Follow Nuxt Content best practices for content structure
+
+### General Guidelines
+- Always consult MCP tools before implementing Nuxt features or components
+- Prefer using Nuxt UI components over custom implementations when available
+- Follow Nuxt 3/4 conventions and best practices
+- Use TypeScript for type safety
+- Reference official documentation through MCP tools rather than making assumptions
+
