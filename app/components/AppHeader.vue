@@ -3,23 +3,28 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
-
+const route = useRoute()
 const { header } = useAppConfig()
 
 const navItems = computed<NavigationMenuItem[]>(() => {
   if (!navigation?.value) return []
   return navigation.value.map((item) => {
     const isActivites = item.path === '/activites'
+    const hasChildren = isActivites && item.children && item.children.length > 0
+    const isActive = route.path === item.path || route.path.startsWith(`${item.path}/`)
+
     return {
       label: item.title,
       icon: item.icon as string | undefined,
       to: item.path,
-      children: isActivites
+      active: isActive,
+      children: hasChildren
         ? item.children?.map(child => ({
             label: child.title,
             description: child.description as string | undefined,
             icon: child.icon as string | undefined,
-            to: child.path
+            to: child.path,
+            active: route.path === child.path
           }))
         : undefined
     }
@@ -64,20 +69,7 @@ const navItems = computed<NavigationMenuItem[]>(() => {
     />
 
     <template #right>
-      <UContentSearchButton
-        v-if="header?.search"
-        class="lg:hidden"
-      />
-
       <UColorModeButton v-if="header?.colorMode" />
-
-      <template v-if="header?.links">
-        <UButton
-          v-for="(link, index) of header.links"
-          :key="index"
-          v-bind="{ color: 'neutral', variant: 'ghost', ...(link as Record<string, unknown>) }"
-        />
-      </template>
     </template>
 
     <template #body>

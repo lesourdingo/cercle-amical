@@ -32,9 +32,7 @@ export default defineAppConfig({
       light: '',
       dark: ''
     },
-    search: true,
-    colorMode: true,
-    links: []
+    colorMode: true
   },
   footer: {
     credits: `Built with Nuxt UI • © ${new Date().getFullYear()}`,
