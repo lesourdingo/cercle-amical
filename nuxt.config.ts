@@ -36,20 +36,9 @@ export default defineNuxtConfig({
       crawlLinks: true,
       autoSubfolderIndex: false
     },
-    // Replace native module requires with empty module for Cloudflare
-    // OG images are prerendered, so native modules aren't needed at runtime
-    replace: {
-      'resvgjs.android-arm64.node': '""',
-      'resvgjs.linux-x64-gnu.node': '""',
-      'resvgjs.darwin-arm64.node': '""',
-      'resvgjs.darwin-x64.node': '""',
-      'resvgjs.win32-x64-msvc.node': '""',
-      './resvgjs.android-arm64.node': '""',
-      './resvgjs.linux-x64-gnu.node': '""',
-      './resvgjs.darwin-arm64.node': '""',
-      './resvgjs.darwin-x64.node': '""',
-      './resvgjs.win32-x64-msvc.node': '""'
-    }
+    // Force static preset for Cloudflare Pages to avoid native module issues
+    // OG images are prerendered, so we don't need server-side rendering
+    preset: 'static'
   },
 
   eslint: {
