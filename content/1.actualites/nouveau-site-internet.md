@@ -5,26 +5,15 @@ date: 2025-12-01
 navigation: false
 ---
 
-# ou
+Le **Cercle Amical de Saint Gildas de Rhuys** est heureux de vous présenter son nouveau site internet.
 
-L'Assemblée Générale annuelle du **Cercle Amical de Saint Gildas de Rhuys** aura lieu :
+Ce nouveau site vous permettra de :
 
-- **Date** : samedi 25 janvier 2025
-- **Heure** : 10h00
-- **Lieu** : Salle du Cercle Amical, Saint Gildas de Rhuys
+- Consulter les **dernières actualités** de l'association
+- Découvrir toutes nos **activités** (belote, tarot, pétanque, etc.)
+- Consulter le **calendrier des événements** à venir
+- Accéder aux **informations pratiques** et aux contacts
 
-## Ordre du jour prévisionnel
+Nous espérons que ce nouveau site facilitera votre accès aux informations du Cercle Amical.
 
-- Bilan moral de l'année écoulée
-- Bilan financier
-- Renouvellement du bureau
-- Présentation du programme d'activités et d'événements 2025
-- Questions / échanges avec les adhérents
-
-## Informations pratiques
-
-- L'accueil des participants se fera à partir de **9h30** (café d'accueil).
-- Seuls les adhérents à jour de leur cotisation pourront prendre part aux votes.
-- À l'issue de l'Assemblée, un **verre de l'amitié** sera offert.
-
-Votre présence est importante pour la vie de l'association. Merci de confirmer votre participation auprès du bureau ou lors des permanences.
+N'hésitez pas à nous faire part de vos remarques et suggestions pour améliorer ce site.

@@ -9,13 +9,24 @@ const { data: items } = await useAsyncData(`content-list-${props.path}`, () =>
     .all()
 )
 
-const filteredItems = computed(() =>
-  items.value?.filter(item =>
+const filteredItems = computed(() => {
+  const filtered = items.value?.filter(item =>
     item.path !== props.path
     && !item.path.endsWith('/index')
     && !item.path.includes('.navigation')
   )
-)
+
+  // Sort by date if items have dates (for events)
+  if (filtered && filtered.some(item => item.date)) {
+    return [...filtered].sort((a, b) => {
+      const aDate = a.date ? new Date(a.date as string).getTime() : 0
+      const bDate = b.date ? new Date(b.date as string).getTime() : 0
+      return aDate - bDate // Sort ascending (earliest first)
+    })
+  }
+
+  return filtered
+})
 </script>
 
 <template>

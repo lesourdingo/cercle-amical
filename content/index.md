@@ -32,7 +32,6 @@ links:
 
 ::u-page-section
 ---
-headline: Nos Activités
 title: Découvrez nos activités
 description: Le Cercle Amical propose une variété d'activités pour tous les goûts et tous les âges.
 features:

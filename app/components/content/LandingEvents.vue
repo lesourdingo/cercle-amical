@@ -9,22 +9,28 @@ const filteredEvents = computed(() => {
   const today = new Date()
   const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate())
 
-  return events.value?.filter((event) => {
-    if (event.path.endsWith('/index') || event.path.includes('.navigation')) {
-      return false
-    }
+  return events.value
+    ?.filter((event) => {
+      if (event.path.endsWith('/index') || event.path.includes('.navigation')) {
+        return false
+      }
 
-    if (!event.date) {
-      return false
-    }
+      if (!event.date) {
+        return false
+      }
 
-    const eventDate = new Date(event.date as string)
-    if (Number.isNaN(eventDate.getTime())) {
-      return false
-    }
+      const eventDate = new Date(event.date as string)
+      if (Number.isNaN(eventDate.getTime())) {
+        return false
+      }
 
-    return eventDate >= startOfToday
-  })
+      return eventDate >= startOfToday
+    })
+    .sort((a, b) => {
+      const aDate = a.date ? new Date(a.date as string).getTime() : 0
+      const bDate = b.date ? new Date(b.date as string).getTime() : 0
+      return aDate - bDate // Sort ascending (earliest first)
+    })
 })
 
 function formatDate(dateString: string | undefined): string {

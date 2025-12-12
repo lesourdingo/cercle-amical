@@ -5,8 +5,6 @@ date: 2025-01-25
 navigation: false
 ---
 
-# Assemblée Générale 2025
-
 L'Assemblée Générale annuelle du **Cercle Amical de Saint Gildas de Rhuys** aura lieu :
 
 - **Date** : samedi 25 janvier 2025  

@@ -5,8 +5,6 @@ date: 2025-01-01
 navigation: false
 ---
 
-# Bienvenue sur le site du Cercle Amical
-
 Nous sommes heureux de vous accueillir sur le nouveau site du **Cercle Amical de Saint Gildas de Rhuys**.
 
 Dans cette rubrique, vous retrouverez :
