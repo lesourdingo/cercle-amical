@@ -33,12 +33,8 @@ export default defineNuxtConfig({
       routes: [
         '/'
       ],
-      crawlLinks: true,
-      autoSubfolderIndex: false
-    },
-    // Force static preset for Cloudflare Pages to avoid native module issues
-    // OG images are prerendered, so we don't need server-side rendering
-    preset: 'static'
+      crawlLinks: true
+    }
   },
 
   eslint: {
