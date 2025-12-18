@@ -34,6 +34,19 @@ export default defineNuxtConfig({
         '/'
       ],
       crawlLinks: true
+    },
+    preset: 'cloudflare_module',
+    cloudflare: {
+      deployConfig: true,
+      wrangler: {
+        d1_databases: [
+          {
+            binding: 'DB',
+            database_name: 'cercel-amical-content',
+            database_id: '73d1d050-a9ac-4660-b74f-bfd29a834325'
+          }
+        ]
+      }
     }
   },
 
