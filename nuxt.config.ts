@@ -33,7 +33,7 @@ export default defineNuxtConfig({
       routes: [
         '/'
       ],
-      crawlLinks: true
+      crawlLinks: false
     },
     preset: 'cloudflare_module',
     cloudflare: {
@@ -87,6 +87,11 @@ export default defineNuxtConfig({
         ]
       }
     ]
+  },
+
+  // Optimize OG image generation for memory usage
+  ogImage: {
+    runtimeCacheStorage: false
   },
   studio: {
     // Git repository configuration (owner and repo are required)
