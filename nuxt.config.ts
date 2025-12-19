@@ -104,6 +104,6 @@ export default defineNuxtConfig({
     i18n: {
       defaultLocale: 'fr' // 'en' or 'fr'
     },
-    route: '/admin' // default: '/_studio'
+    route: '/admin' // default: '/_studio',
   }
 })

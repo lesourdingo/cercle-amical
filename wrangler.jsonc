@@ -1,6 +1,8 @@
 {
   "name": "cercle-amical",
   "compatibility_date": "2025-12-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "keep_vars": true,
   "assets": {
     "directory": "./.output/public"
   }
