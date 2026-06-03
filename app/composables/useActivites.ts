@@ -1,10 +1,10 @@
-import type { ActiviteSlug,
+import type { ActiviteSlug, EditorialIconItem } from '~/utils/activites'
+import {
   ACTIVITE_ICONS,
   ACTIVITE_LABELS,
   extractNavigationIcon,
   getEditorialIcon,
-  isActiviteSlug,
-  type EditorialIconItem
+  isActiviteSlug
 } from '~/utils/activites'
 
 export function useActivites() {
