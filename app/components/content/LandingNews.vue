@@ -51,16 +51,16 @@ function formatDate(dateString: string | undefined): string {
                 <h3 class="text-lg font-semibold text-highlighted">
                   {{ article.title }}
                 </h3>
-              <p
-                v-if="article.date"
-                class="text-xs text-muted flex items-center gap-1.5"
-              >
-                <UIcon
-                  name="i-lucide-calendar"
-                  class="size-3.5"
-                />
-                {{ formatDate(article.date as string) }}
-              </p>
+                <p
+                  v-if="article.date"
+                  class="text-xs text-muted flex items-center gap-1.5"
+                >
+                  <UIcon
+                    name="i-lucide-calendar"
+                    class="size-3.5"
+                  />
+                  {{ formatDate(article.date as string) }}
+                </p>
               </div>
             </div>
           </template>

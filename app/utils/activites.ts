@@ -15,30 +15,30 @@ export type ActiviteSlug = typeof ACTIVITE_SLUGS[number]
 
 /** Libellés pour le formulaire Studio (enum). */
 export const ACTIVITE_LABELS: Record<ActiviteSlug, string> = {
-  belote: 'Belote',
-  tarot: 'Tarot',
-  petanque: 'Pétanque',
+  'belote': 'Belote',
+  'tarot': 'Tarot',
+  'petanque': 'Pétanque',
   'boule-bretonne': 'Boule bretonne',
-  loto: 'Loto',
-  repas: 'Repas & convivialité',
-  sorties: 'Sorties',
-  voyages: 'Voyages',
-  association: 'Vie de l\'association',
-  autre: 'Autre'
+  'loto': 'Loto',
+  'repas': 'Repas & convivialité',
+  'sorties': 'Sorties',
+  'voyages': 'Voyages',
+  'association': 'Vie de l\'association',
+  'autre': 'Autre'
 }
 
 /** Icônes alignées sur les pages Activités (repli si non chargées depuis le contenu). */
 export const ACTIVITE_ICONS: Record<ActiviteSlug, string> = {
-  belote: 'i-lucide-spade',
-  tarot: 'i-lucide-club',
-  petanque: 'i-lucide-circle',
+  'belote': 'i-lucide-spade',
+  'tarot': 'i-lucide-club',
+  'petanque': 'i-lucide-circle',
   'boule-bretonne': 'i-lucide-circle-dot',
-  loto: 'i-lucide-ticket',
-  repas: 'i-lucide-utensils',
-  sorties: 'i-lucide-map-pin',
-  voyages: 'i-lucide-plane',
-  association: 'i-lucide-users',
-  autre: 'i-lucide-calendar'
+  'loto': 'i-lucide-ticket',
+  'repas': 'i-lucide-utensils',
+  'sorties': 'i-lucide-map-pin',
+  'voyages': 'i-lucide-plane',
+  'association': 'i-lucide-users',
+  'autre': 'i-lucide-calendar'
 }
 
 const INFER_ORDER: ActiviteSlug[] = [
@@ -55,14 +55,14 @@ const INFER_ORDER: ActiviteSlug[] = [
 
 const INFER_KEYWORDS: Partial<Record<ActiviteSlug, string[]>> = {
   'boule-bretonne': ['boule bretonne'],
-  association: ['assemblee', 'assemblée', 'ag ordinaire', 'ag extraordinaire'],
-  belote: ['belote', 'bélote'],
-  tarot: ['tarot'],
-  petanque: ['petanque', 'pétanque'],
-  loto: ['loto'],
-  repas: ['repas', 'chandeleur', 'galette', 'noel', 'noël', 'beaujolais', 'voeux', 'vœux'],
-  sorties: ['sortie'],
-  voyages: ['voyage']
+  'association': ['assemblee', 'assemblée', 'ag ordinaire', 'ag extraordinaire'],
+  'belote': ['belote', 'bélote'],
+  'tarot': ['tarot'],
+  'petanque': ['petanque', 'pétanque'],
+  'loto': ['loto'],
+  'repas': ['repas', 'chandeleur', 'galette', 'noel', 'noël', 'beaujolais', 'voeux', 'vœux'],
+  'sorties': ['sortie'],
+  'voyages': ['voyage']
 }
 
 function normalizeText(value: string): string {

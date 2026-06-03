@@ -1,5 +1,4 @@
-import type { ActiviteSlug } from '~/utils/activites'
-import {
+import type { ActiviteSlug,
   ACTIVITE_ICONS,
   ACTIVITE_LABELS,
   extractNavigationIcon,
