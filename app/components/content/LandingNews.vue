@@ -1,23 +1,20 @@
 <script setup lang="ts">
 const { data: news } = useAsyncData('landing-news', () =>
-  queryCollection('docs')
+  queryCollection('actualites')
     .where('path', 'LIKE', '/actualites/%')
+    .order('date', 'DESC')
     .all()
 )
 
 const filteredNews = computed(() => {
   if (!news.value) return []
 
-  return [...news.value]
-    .filter(article =>
-      !article.path.endsWith('/index')
-      && !article.path.includes('.navigation')
-    )
-    .sort((a, b) => {
-      const aDate = a.date ? new Date(a.date as string).getTime() : 0
-      const bDate = b.date ? new Date(b.date as string).getTime() : 0
-      return bDate - aDate
-    })
+  const articles = news.value.filter(article =>
+    !article.path.endsWith('/index')
+    && !article.path.includes('.navigation')
+  )
+
+  return sortByDate(articles, 'DESC')
 })
 
 function formatDate(dateString: string | undefined): string {
@@ -44,10 +41,16 @@ function formatDate(dateString: string | undefined): string {
           variant="subtle"
         >
           <template #header>
-            <div class="space-y-2">
-              <h3 class="text-lg font-semibold text-highlighted">
-                {{ article.title }}
-              </h3>
+            <div class="flex items-start gap-3">
+              <EditorialActiviteIcon
+                :item="article"
+                fallback-icon="i-lucide-newspaper"
+                size="sm"
+              />
+              <div class="space-y-2 min-w-0 flex-1">
+                <h3 class="text-lg font-semibold text-highlighted">
+                  {{ article.title }}
+                </h3>
               <p
                 v-if="article.date"
                 class="text-xs text-muted flex items-center gap-1.5"
@@ -58,6 +61,7 @@ function formatDate(dateString: string | undefined): string {
                 />
                 {{ formatDate(article.date as string) }}
               </p>
+              </div>
             </div>
           </template>
 

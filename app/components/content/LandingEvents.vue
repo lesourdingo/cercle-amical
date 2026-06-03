@@ -1,36 +1,20 @@
 <script setup lang="ts">
 const { data: events } = useAsyncData('landing-events', () =>
-  queryCollection('docs')
+  queryCollection('evenements')
     .where('path', 'LIKE', '/evenements/%')
+    .order('date', 'ASC')
     .all()
 )
 
 const filteredEvents = computed(() => {
-  const today = new Date()
-  const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+  const upcoming = events.value?.filter((event) => {
+    if (event.path.endsWith('/index') || event.path.includes('.navigation')) {
+      return false
+    }
+    return isUpcomingByDate(event.date)
+  })
 
-  return events.value
-    ?.filter((event) => {
-      if (event.path.endsWith('/index') || event.path.includes('.navigation')) {
-        return false
-      }
-
-      if (!event.date) {
-        return false
-      }
-
-      const eventDate = new Date(event.date as string)
-      if (Number.isNaN(eventDate.getTime())) {
-        return false
-      }
-
-      return eventDate >= startOfToday
-    })
-    .sort((a, b) => {
-      const aDate = a.date ? new Date(a.date as string).getTime() : 0
-      const bDate = b.date ? new Date(b.date as string).getTime() : 0
-      return aDate - bDate // Sort ascending (earliest first)
-    })
+  return upcoming ? sortEvenementsByDate(upcoming) : []
 })
 
 function formatDate(dateString: string | undefined): string {
@@ -57,10 +41,16 @@ function formatDate(dateString: string | undefined): string {
           variant="subtle"
         >
           <template #header>
-            <div class="space-y-2">
-              <h3 class="text-lg font-semibold text-highlighted">
-                {{ event.title }}
-              </h3>
+            <div class="flex items-start gap-3">
+              <EditorialActiviteIcon
+                :item="event"
+                fallback-icon="i-lucide-calendar"
+                size="sm"
+              />
+              <div class="space-y-2 min-w-0 flex-1">
+                <h3 class="text-lg font-semibold text-highlighted">
+                  {{ event.title }}
+                </h3>
               <p
                 v-if="event.date"
                 class="text-xs text-muted flex items-center gap-1.5"
@@ -71,6 +61,7 @@ function formatDate(dateString: string | undefined): string {
                 />
                 {{ formatDate(event.date as string) }}
               </p>
+              </div>
             </div>
           </template>
 

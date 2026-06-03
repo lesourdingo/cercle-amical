@@ -1,0 +1,111 @@
+import type { ContentNavigationItem } from '@nuxt/content'
+
+export const CONTENT_COLLECTIONS = ['actualites', 'evenements', 'docs'] as const
+export type ContentCollectionName = typeof CONTENT_COLLECTIONS[number]
+
+const NAV_ORDER = ['/actualites', '/activites', '/evenements', '/informations']
+
+export function collectionForPath(path: string): ContentCollectionName {
+  if (path === '/actualites' || path.startsWith('/actualites/')) {
+    return 'actualites'
+  }
+  if (path === '/evenements' || path.startsWith('/evenements/')) {
+    return 'evenements'
+  }
+  return 'docs'
+}
+
+export function queryContentPage(path: string) {
+  return queryCollection(collectionForPath(path)).path(path).first()
+}
+
+export function parseContentDate(value: string | Date | undefined): number {
+  if (!value) return 0
+  const time = new Date(value as string).getTime()
+  return Number.isNaN(time) ? 0 : time
+}
+
+export function getStartOfToday(): number {
+  const today = new Date()
+  return new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()
+}
+
+export function isUpcomingByDate(date: string | Date | undefined): boolean {
+  const time = parseContentDate(date)
+  return time > 0 && time >= getStartOfToday()
+}
+
+export function isPastByDate(date: string | Date | undefined): boolean {
+  const time = parseContentDate(date)
+  return time > 0 && time < getStartOfToday()
+}
+
+export function sortByDate<T extends { date?: string | Date }>(
+  items: T[],
+  direction: 'ASC' | 'DESC' = 'ASC'
+): T[] {
+  const sign = direction === 'ASC' ? 1 : -1
+  return [...items].sort((a, b) => (parseContentDate(a.date) - parseContentDate(b.date)) * sign)
+}
+
+/** Événements : année en cours d’abord (ordre chronologique), puis les autres années. */
+export function sortEvenementsByDate<T extends { date?: string | Date }>(items: T[]): T[] {
+  const year = new Date().getFullYear()
+  const startOfYear = new Date(year, 0, 1).getTime()
+  const endOfYear = new Date(year + 1, 0, 1).getTime()
+
+  return [...items].sort((a, b) => {
+    const aDate = parseContentDate(a.date)
+    const bDate = parseContentDate(b.date)
+    const aInYear = aDate >= startOfYear && aDate < endOfYear
+    const bInYear = bDate >= startOfYear && bDate < endOfYear
+
+    if (aInYear !== bInYear) {
+      return aInYear ? -1 : 1
+    }
+
+    return aDate - bDate
+  })
+}
+
+/** Liste les pages d’une section, triées par date quand c’est pertinent. */
+export function queryContentList(path: string) {
+  const collection = collectionForPath(path)
+  let query = queryCollection(collection).where('path', 'LIKE', `${path}/%`)
+
+  if (path === '/evenements') {
+    query = query.order('date', 'ASC')
+  } else if (path === '/actualites') {
+    query = query.order('date', 'DESC')
+  }
+
+  return query.all()
+}
+
+export function sortNavigation(items: ContentNavigationItem[]) {
+  return [...items].sort((a, b) => {
+    const ai = NAV_ORDER.indexOf(a.path)
+    const bi = NAV_ORDER.indexOf(b.path)
+    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi)
+  })
+}
+
+export async function queryMergedNavigation() {
+  const [actualites, docs, evenements] = await Promise.all([
+    queryCollectionNavigation('actualites').order('date', 'DESC'),
+    queryCollectionNavigation('docs'),
+    queryCollectionNavigation('evenements').order('date', 'ASC')
+  ])
+  return sortNavigation([
+    ...(actualites ?? []),
+    ...(docs ?? []),
+    ...(evenements ?? [])
+  ])
+}
+
+export async function queryMergedSearchSections() {
+  const sections = await Promise.all(
+    CONTENT_COLLECTIONS.map(name => queryCollectionSearchSections(name))
+  )
+  return sections.flat()
+}

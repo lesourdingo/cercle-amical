@@ -6,9 +6,6 @@ seo:
 
 ::u-page-hero
 ---
-headline: Bienvenue
-title: Le Cercle Amical
-description: Une association conviviale à Saint Gildas de Rhuys proposant des activités variées, des événements réguliers et des moments de partage entre amis.
 links:
   - label: Découvrir nos activités
     to: /activites
@@ -20,20 +17,21 @@ links:
     variant: outline
     size: xl
     icon: i-lucide-info
+description: Une association conviviale à Saint Gildas de Rhuys proposant des
+  activités variées, des événements réguliers et des moments de partage entre
+  amis.
+headline: Bienvenue
+title: Le Cercle Amical
 ---
 :hero-background
 ::
 
-::landing-events
-::
+:landing-events
 
-::landing-news
-::
+:landing-news
 
 ::u-page-section
 ---
-title: Découvrez nos activités
-description: Le Cercle Amical propose une variété d'activités pour tous les goûts et tous les âges.
 features:
   - title: Belote
     description: Venez jouer à la belote dans une ambiance conviviale et amicale.
@@ -53,13 +51,14 @@ features:
   - title: Voyages
     description: Découvrez de nouvelles destinations avec nos voyages en groupe.
     icon: i-lucide-plane
+description: Le Cercle Amical propose une variété d'activités pour tous les
+  goûts et tous les âges.
+title: Découvrez nos activités
 ---
 ::
 
 ::u-page-section
 ---
-title: Rejoignez Le Cercle Amical
-description: Devenez membre et participez à la vie de notre association. Tarifs avantageux et nombreux avantages vous attendent.
 links:
   - label: Adhérer maintenant
     to: /informations
@@ -68,5 +67,8 @@ links:
     to: /evenements
     variant: subtle
     icon: i-lucide-calendar
+description: Devenez membre et participez à la vie de notre association. Tarifs
+  avantageux et nombreux avantages vous attendent.
+title: Rejoignez Le Cercle Amical
 ---
 ::

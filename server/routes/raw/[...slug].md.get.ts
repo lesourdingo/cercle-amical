@@ -3,6 +3,16 @@ import { stringify } from 'minimark/stringify'
 import { queryCollection } from '@nuxt/content/nitro'
 import type { Collections } from '@nuxt/content'
 
+function collectionForPath(path: string): keyof Collections {
+  if (path === '/actualites' || path.startsWith('/actualites/')) {
+    return 'actualites'
+  }
+  if (path === '/evenements' || path.startsWith('/evenements/')) {
+    return 'evenements'
+  }
+  return 'docs'
+}
+
 export default eventHandler(async (event) => {
   const slug = getRouterParams(event)['slug.md']
   if (!slug?.endsWith('.md')) {
@@ -11,7 +21,7 @@ export default eventHandler(async (event) => {
 
   const path = withLeadingSlash(slug.replace('.md', ''))
 
-  const page = await queryCollection(event, 'docs' as keyof Collections).path(path).first()
+  const page = await queryCollection(event, collectionForPath(path)).path(path).first()
   if (!page) {
     throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
   }

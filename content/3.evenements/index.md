@@ -5,8 +5,4 @@ navigation:
   icon: i-lucide-calendar
 ---
 
-::content-list
----
-path: /evenements
----
-::
+:content-list{path="/evenements"}

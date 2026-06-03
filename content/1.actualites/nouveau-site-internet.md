@@ -1,6 +1,7 @@
 ---
 title: Nouveau site internet
 description: Nouveau site internet
+activite: autre
 date: 2025-12-01
 navigation: false
 ---

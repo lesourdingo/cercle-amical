@@ -17,6 +17,10 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   content: {
+    // Node 22+ built-in SQLite (évite les soucis better-sqlite3 en dev local)
+    experimental: {
+      sqliteConnector: 'native'
+    },
     build: {
       markdown: {
         toc: {

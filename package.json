@@ -5,6 +5,7 @@
   "scripts": {
     "build": "NODE_OPTIONS=--max-old-space-size=4096 nuxt build",
     "dev": "nuxt dev",
+    "content:reset": "nuxi cleanup",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
@@ -20,7 +21,7 @@
     "nuxt": "^4.2.2",
     "nuxt-llms": "0.1.3",
     "nuxt-og-image": "^5.1.13",
-    "nuxt-studio": "1.0.0-beta.0"
+    "nuxt-studio": "1.7.0"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.12.1",
