@@ -3,7 +3,20 @@ import type { ContentNavigationItem } from '@nuxt/content'
 export const CONTENT_COLLECTIONS = ['actualites', 'evenements', 'docs'] as const
 export type ContentCollectionName = typeof CONTENT_COLLECTIONS[number]
 
-const NAV_ORDER = ['/actualites', '/activites', '/evenements', '/informations']
+export const NAV_ORDER = ['/actualites', '/evenements', '/activites', '/informations'] as const
+
+/** Sections sans sous-menu dans la barre de navigation (évite le bouton chevron Nuxt UI). */
+export const NAV_WITHOUT_CHILDREN = ['/actualites', '/evenements', '/informations'] as const
+
+export function sanitizeNavigationItems(items: ContentNavigationItem[]): ContentNavigationItem[] {
+  return items.map((item) => {
+    if (NAV_WITHOUT_CHILDREN.includes(item.path as (typeof NAV_WITHOUT_CHILDREN)[number])) {
+      const { children: _children, ...rest } = item
+      return rest
+    }
+    return item
+  })
+}
 
 export function collectionForPath(path: string): ContentCollectionName {
   if (path === '/actualites' || path.startsWith('/actualites/')) {
@@ -84,8 +97,8 @@ export function queryContentList(path: string) {
 
 export function sortNavigation(items: ContentNavigationItem[]) {
   return [...items].sort((a, b) => {
-    const ai = NAV_ORDER.indexOf(a.path)
-    const bi = NAV_ORDER.indexOf(b.path)
+    const ai = (NAV_ORDER as readonly string[]).indexOf(a.path)
+    const bi = (NAV_ORDER as readonly string[]).indexOf(b.path)
     return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi)
   })
 }
@@ -96,11 +109,11 @@ export async function queryMergedNavigation() {
     queryCollectionNavigation('docs'),
     queryCollectionNavigation('evenements').order('date', 'ASC')
   ])
-  return sortNavigation([
+  return sanitizeNavigationItems(sortNavigation([
     ...(actualites ?? []),
     ...(docs ?? []),
     ...(evenements ?? [])
-  ])
+  ]))
 }
 
 export async function queryMergedSearchSections() {

@@ -3,16 +3,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const filteredNavigation = computed(() => {
-  if (!navigation?.value) return []
-  const noChildrenPaths = ['/actualites', '/evenements', '/informations']
-  return navigation.value.map((item) => {
-    if (noChildrenPaths.includes(item.path)) {
-      return { ...item, children: undefined }
-    }
-    return item
-  })
-})
+const filteredNavigation = computed(() => navigation?.value ?? [])
 </script>
 
 <template>

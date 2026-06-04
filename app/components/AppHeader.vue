@@ -1,34 +1,49 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
+import { NAV_ORDER } from '~/utils/content-collections'
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 const route = useRoute()
 const { header } = useAppConfig()
 
+function isNavItemActive(path: string) {
+  if (route.path === path) return true
+  if (path === '/') return false
+  return route.path.startsWith(`${path}/`)
+}
+
 const navItems = computed<NavigationMenuItem[]>(() => {
   if (!navigation?.value) return []
-  return navigation.value.map((item) => {
-    const isActivites = item.path === '/activites'
-    const hasChildren = isActivites && item.children && item.children.length > 0
-    const isActive = route.path === item.path || route.path.startsWith(`${item.path}/`)
+  return navigation.value
+    .filter(item => NAV_ORDER.includes(item.path as (typeof NAV_ORDER)[number]))
+    .map((item) => {
+      const isActivites = item.path === '/activites'
+      const isActive = isNavItemActive(item.path)
 
-    return {
-      label: item.title,
-      icon: item.icon as string | undefined,
-      to: item.path,
-      active: isActive,
-      children: hasChildren
-        ? item.children?.map(child => ({
-            label: child.title,
-            description: child.description as string | undefined,
-            icon: child.icon as string | undefined,
-            to: child.path,
-            active: route.path === child.path
-          }))
-        : undefined
-    }
-  })
+      const base = {
+        label: item.title,
+        icon: item.icon as string | undefined,
+        to: item.path,
+        active: isActive
+      }
+
+      if (!isActivites || !item.children?.length) {
+        return base
+      }
+
+      return {
+        ...base,
+        type: 'trigger' as const,
+        children: item.children.map(child => ({
+          label: child.title,
+          description: child.description as string | undefined,
+          icon: child.icon as string | undefined,
+          to: child.path,
+          active: route.path === child.path
+        }))
+      }
+    })
 })
 </script>
 
