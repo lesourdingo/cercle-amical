@@ -50,6 +50,15 @@ const pageFallbackIcon = computed(() => {
 
 const showActiviteIcon = computed(() => collection === 'actualites' || collection === 'evenements')
 
+const activiteSlug = activiteSlugFromPagePath(route.path)
+
+const { data: upcomingEvents } = activiteSlug
+  ? await useAsyncData(
+      `activite-events-${activiteSlug}`,
+      () => queryUpcomingEvenementsForActivite(activiteSlug)
+    )
+  : { data: ref([]) }
+
 defineOgImageComponent('Docs', {
   headline: headline.value
 })
@@ -87,6 +96,12 @@ defineOgImageComponent('Docs', {
       <ContentRenderer
         v-if="page"
         :value="page"
+      />
+
+      <ActiviteUpcomingEvents
+        v-if="upcomingEvents?.length && activiteSlug"
+        :event="upcomingEvents[0]"
+        :activite="activiteSlug"
       />
 
       <USeparator v-if="surround?.length" />

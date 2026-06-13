@@ -76,6 +76,15 @@ export function isActiviteSlug(value: string | undefined): value is ActiviteSlug
   return !!value && ACTIVITE_SLUGS.includes(value as ActiviteSlug)
 }
 
+/** Slug d’activité à partir du chemin d’une page `/activites/{slug}`. */
+export function activiteSlugFromPagePath(path: string): ActiviteSlug | undefined {
+  if (!path.startsWith('/activites/') || path === '/activites') {
+    return undefined
+  }
+  const slug = path.slice('/activites/'.length)
+  return isActiviteSlug(slug) ? slug : undefined
+}
+
 export function inferActiviteFromText(
   title = '',
   description = ''

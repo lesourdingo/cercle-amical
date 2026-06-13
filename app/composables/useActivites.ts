@@ -4,8 +4,12 @@ import {
   ACTIVITE_LABELS,
   extractNavigationIcon,
   getEditorialIcon,
-  isActiviteSlug
+  isActiviteSlug,
+  resolveActiviteSlug
 } from '~/utils/activites'
+
+export const ALL_ACTIVITES_FILTER = 'all' as const
+export type ActiviteFilter = ActiviteSlug | typeof ALL_ACTIVITES_FILTER
 
 export function useActivites() {
   const { data: activitePages } = useAsyncData('activites-icons', () =>
@@ -41,6 +45,15 @@ export function useActivites() {
     }))
   )
 
+  const filterOptions = computed(() => [
+    {
+      value: ALL_ACTIVITES_FILTER,
+      label: 'Toutes les activités',
+      icon: 'i-lucide-layout-grid'
+    },
+    ...options.value
+  ])
+
   function getIcon(
     item: EditorialIconItem,
     fallbackIcon = 'i-lucide-calendar'
@@ -52,16 +65,30 @@ export function useActivites() {
   }
 
   function getSlug(item: EditorialIconItem): ActiviteSlug {
-    if (isActiviteSlug(item.activite)) {
-      return item.activite
+    return resolveActiviteSlug(item)
+  }
+
+  function matchesFilter(item: EditorialIconItem, filter: ActiviteFilter): boolean {
+    if (filter === ALL_ACTIVITES_FILTER) {
+      return true
     }
-    return 'autre'
+    return resolveActiviteSlug(item) === filter
+  }
+
+  function parseActiviteFilter(value: unknown): ActiviteFilter {
+    if (typeof value === 'string' && isActiviteSlug(value)) {
+      return value
+    }
+    return ALL_ACTIVITES_FILTER
   }
 
   return {
     iconBySlug,
     options,
+    filterOptions,
     getIcon,
-    getSlug
+    getSlug,
+    matchesFilter,
+    parseActiviteFilter
   }
 }

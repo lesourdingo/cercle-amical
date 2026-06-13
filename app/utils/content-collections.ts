@@ -1,4 +1,6 @@
 import type { ContentNavigationItem } from '@nuxt/content'
+import type { ActiviteSlug } from '~/utils/activites'
+import { resolveActiviteSlug } from '~/utils/activites'
 
 export const CONTENT_COLLECTIONS = ['actualites', 'evenements', 'docs'] as const
 export type ContentCollectionName = typeof CONTENT_COLLECTIONS[number]
@@ -79,6 +81,23 @@ export function sortEvenementsByDate<T extends { date?: string | Date }>(items: 
 
     return aDate - bDate
   })
+}
+
+/** Événements à venir pour une activité donnée. */
+export async function queryUpcomingEvenementsForActivite(activite: ActiviteSlug) {
+  const items = await queryCollection('evenements')
+    .where('path', 'LIKE', '/evenements/%')
+    .order('date', 'ASC')
+    .all()
+
+  const upcoming = items.filter(item =>
+    !item.path.endsWith('/index')
+    && !item.path.includes('.navigation')
+    && isUpcomingByDate(item.date)
+    && resolveActiviteSlug(item) === activite
+  )
+
+  return sortEvenementsByDate(upcoming)
 }
 
 /** Liste les pages d’une section, triées par date quand c’est pertinent. */
