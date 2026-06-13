@@ -59,6 +59,8 @@ const { data: upcomingEvents } = activiteSlug
     )
   : { data: ref([]) }
 
+const nextUpcomingEvent = computed(() => upcomingEvents.value?.[0])
+
 defineOgImageComponent('Docs', {
   headline: headline.value
 })
@@ -99,8 +101,8 @@ defineOgImageComponent('Docs', {
       />
 
       <ActiviteUpcomingEvents
-        v-if="upcomingEvents?.length && activiteSlug"
-        :event="upcomingEvents[0]"
+        v-if="nextUpcomingEvent && activiteSlug"
+        :event="nextUpcomingEvent"
         :activite="activiteSlug"
       />
 
