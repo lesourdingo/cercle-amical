@@ -30,6 +30,11 @@ export default defineNuxtConfig({
     }
   },
 
+  runtimeConfig: {
+    // Alternative to STUDIO_GOOGLE_MODERATORS — set NUXT_STUDIO_GOOGLE_MODERATORS on Cloudflare
+    studioGoogleModerators: ''
+  },
+
   compatibilityDate: '2025-12-12',
 
   nitro: {
@@ -97,6 +102,7 @@ export default defineNuxtConfig({
   ogImage: {
     runtimeCacheStorage: false
   },
+
   studio: {
     // Git repository configuration (owner and repo are required)
     repository: {
