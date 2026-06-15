@@ -20,7 +20,6 @@ links:
 description: Une association conviviale à Saint Gildas de Rhuys proposant des
   activités variées, des événements réguliers et des moments de partage entre
   amis.
-headline: Bienvenue
 title: Le Cercle Amical
 ---
 :hero-background
