@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
+    '@nuxthub/core',
     '@nuxt/image',
     '@nuxt/ui',
     '@nuxt/content',
@@ -32,17 +33,28 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     // Alternative to STUDIO_GOOGLE_MODERATORS — set NUXT_STUDIO_GOOGLE_MODERATORS on Cloudflare
-    studioGoogleModerators: ''
+    studioGoogleModerators: '',
+    public: {
+      siteUrl: ''
+    }
   },
 
   compatibilityDate: '2025-12-12',
 
+  routeRules: {
+    '/': { prerender: true },
+    '/actualites/**': { prerender: true },
+    '/evenements/**': { prerender: true },
+    '/activites/**': { prerender: true },
+    '/informations/**': { prerender: true },
+    '/admin/**': { prerender: false }
+  },
+
   nitro: {
     prerender: {
-      routes: [
-        '/'
-      ],
-      crawlLinks: false
+      crawlLinks: true,
+      routes: ['/'],
+      failOnError: false
     },
     preset: 'cloudflare_module',
     cloudflare: {
@@ -56,6 +68,21 @@ export default defineNuxtConfig({
           }
         ]
       }
+    }
+  },
+
+  hub: {
+    db: {
+      dialect: 'sqlite',
+      driver: 'd1',
+      connection: {
+        databaseId: '73d1d050-a9ac-4660-b74f-bfd29a834325'
+      }
+    },
+    blob: {
+      driver: 'cloudflare-r2',
+      binding: 'BLOB',
+      bucketName: process.env.NUXT_HUB_BLOB_BUCKET_NAME || 'cercle-amical-media'
     }
   },
 
@@ -73,26 +100,40 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://docs-template.nuxt.dev/',
+    domain: process.env.NUXT_PUBLIC_SITE_URL || 'https://cercle-amical.pages.dev',
     title: 'Cercle Amical',
     description: 'Site du Cercle Amical de Saint Gildas de Rhuys.',
     full: {
-      title: 'Cercle Amical - Documentation complète',
-      description: 'Documentation et contenu du site du Cercle Amical.'
+      title: 'Cercle Amical - Contenu complet',
+      description: 'Actualités, événements, activités et informations du Cercle Amical.'
     },
     sections: [
       {
-        title: 'Getting Started',
-        contentCollection: 'docs',
+        title: 'Actualités',
+        contentCollection: 'actualites',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
+          { field: 'path', operator: 'LIKE', value: '/actualites/%' }
         ]
       },
       {
-        title: 'Essentials',
+        title: 'Événements',
+        contentCollection: 'evenements',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/evenements/%' }
+        ]
+      },
+      {
+        title: 'Activités',
         contentCollection: 'docs',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/essentials%' }
+          { field: 'path', operator: 'LIKE', value: '/activites/%' }
+        ]
+      },
+      {
+        title: 'Informations',
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/informations%' }
         ]
       }
     ]
@@ -114,6 +155,10 @@ export default defineNuxtConfig({
     i18n: {
       defaultLocale: 'fr' // 'en' or 'fr'
     },
-    route: '/admin' // default: '/_studio',
+    route: '/admin', // default: '/_studio',
+    media: {
+      external: true,
+      prefix: 'studio'
+    }
   }
 })

@@ -1,21 +1,19 @@
 <script setup lang="ts">
-const { data: news } = useAsyncData('landing-news', () =>
+const { data: news } = await useAsyncData('landing-news', () =>
   queryCollection('actualites')
     .where('path', 'LIKE', '/actualites/%')
+    .select('path', 'title', 'description', 'date', 'activite')
     .order('date', 'DESC')
+    .limit(3)
     .all()
 )
 
-const filteredNews = computed(() => {
-  if (!news.value) return []
-
-  const articles = news.value.filter(article =>
+const filteredNews = computed(() =>
+  (news.value ?? []).filter(article =>
     !article.path.endsWith('/index')
     && !article.path.includes('.navigation')
   )
-
-  return sortByDate(articles, 'DESC')
-})
+)
 
 function formatDate(dateString: string | undefined): string {
   if (!dateString) return ''
@@ -36,7 +34,7 @@ function formatDate(dateString: string | undefined): string {
     <template #body>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <UCard
-          v-for="article in filteredNews?.slice(0, 3)"
+          v-for="article in filteredNews"
           :key="article.path"
           variant="subtle"
         >

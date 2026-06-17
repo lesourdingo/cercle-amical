@@ -6,6 +6,18 @@ const { data: files } = useLazyAsyncData('search', () => queryMergedSearchSectio
   server: false
 })
 
+if (import.meta.prerender) {
+  const collections = ['docs', 'actualites', 'evenements'] as const
+  const pages = await Promise.all(
+    collections.map(collection => queryCollection(collection).select('path').all())
+  )
+  prerenderRoutes(
+    pages.flat()
+      .map(page => page.path)
+      .filter((path): path is string => !!path && !path.includes('.navigation'))
+  )
+}
+
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
@@ -14,7 +26,7 @@ useHead({
     { rel: 'icon', href: '/favicon.ico' }
   ],
   htmlAttrs: {
-    lang: 'en'
+    lang: 'fr'
   }
 })
 

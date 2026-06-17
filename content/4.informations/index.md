@@ -1,11 +1,11 @@
 ---
 title: Informations
-description: Toutes les informations sur le Cercle Amical
 date: 2025-01-10
-author: Secrétariat
-category: Informations
+description: Toutes les informations sur le Cercle Amical
 navigation:
   icon: i-lucide-info
+author: Secrétariat
+category: Informations
 ---
 
 ## Contact
@@ -14,12 +14,12 @@ N'hésitez pas à nous contacter pour toute question ou information.
 
 ### Coordonnées
 
-**Cercle Amical**  
-123 Rue de la République  
-75000 Paris  
+**Cercle Amical**:br
+123 Rue de la République :br
+75000 Paris :br
 France
 
-- **Email** : contact@cercle-amical.fr
+- **Email** : <contact@cercle-amical.fr>
 - **Téléphone** : +33 1 23 45 67 89
 - **Horaires** : Lundi au Vendredi, 14h-18h
 
@@ -38,7 +38,7 @@ France
 ### Réseaux sociaux
 
 - **Facebook** : [@CercleAmical](https://facebook.com/cercleamical)
-- **Instagram** : [@cercle_amical](https://instagram.com/cercle_amical)
+- **Instagram** : [@cercle\_amical](https://instagram.com/cercle_amical)
 - **Twitter** : [@CercleAmical](https://twitter.com/cercleamical)
 
 ### Bureau de l'association
@@ -172,4 +172,3 @@ Un règlement intérieur peut être établi par le conseil d'administration, qui
 ### Article 15 - Dissolution
 
 En cas de dissolution prononcée par les deux tiers au moins des membres présents à l'assemblée générale, un ou plusieurs liquidateurs sont nommés par celle-ci.
-

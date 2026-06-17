@@ -1,45 +1,60 @@
-import { defineContentConfig, defineCollection, property, z } from '@nuxt/content'
+import { defineContentConfig, defineCollection, property } from '@nuxt/content'
+import { z } from 'zod'
+
 import { ACTIVITE_SLUGS } from './app/utils/activites'
 
+type StudioEditorOptions = {
+  label?: string
+  description?: string
+  tooltip?: string
+  input?: 'media' | 'icon' | 'textarea'
+  iconLibraries?: string[]
+}
+
+/** Studio field metadata — richer than @nuxt/content EditorOptions types. */
+function studioEditor(options: StudioEditorOptions) {
+  return options as Parameters<ReturnType<typeof property<z.ZodString>>['editor']>[0]
+}
+
 const pageLinksSchema = z.array(z.object({
-  label: property(z.string()).editor({ label: 'Libellé' }),
-  icon: property(z.string()).editor({
+  label: property(z.string()).editor(studioEditor({ label: 'Libellé' })),
+  icon: property(z.string()).editor(studioEditor({
     input: 'icon',
     iconLibraries: ['lucide', 'simple-icons'],
     label: 'Icône'
-  }),
-  to: property(z.string()).editor({ label: 'Lien', description: 'Chemin interne ou URL' }),
+  })),
+  to: property(z.string()).editor(studioEditor({ label: 'Lien', description: 'Chemin interne ou URL' })),
   target: z.string().optional()
 })).optional()
 
 /** Schéma partagé pour les articles et pages d’index (formulaire Studio). */
 const editorialPageSchema = z.object({
-  title: property(z.string()).editor({
+  title: property(z.string()).editor(studioEditor({
     label: 'Titre',
     description: 'Titre affiché sur la page et dans les listes'
-  }),
-  description: property(z.string()).editor({
+  })),
+  description: property(z.string()).editor(studioEditor({
     input: 'textarea',
     label: 'Résumé',
     description: 'Court texte affiché sous le titre et dans les cartes'
-  }),
-  date: property(z.string().date()).editor({
+  })),
+  date: property(z.string().date()).editor(studioEditor({
     label: 'Date',
     description: 'Date de publication (actualités) ou de l’événement',
     tooltip: 'Format AAAA-MM-JJ'
-  }).optional(),
-  activite: property(z.enum(ACTIVITE_SLUGS)).editor({
+  })).optional(),
+  activite: property(z.enum(ACTIVITE_SLUGS)).editor(studioEditor({
     label: 'Activité',
     description: 'Détermine l’icône affichée (identique à celle de la page Activité correspondante)'
-  }).optional(),
+  })).optional(),
   navigation: z.union([
     z.literal(false),
     z.object({
-      icon: property(z.string()).editor({
+      icon: property(z.string()).editor(studioEditor({
         input: 'icon',
         iconLibraries: ['lucide'],
         label: 'Icône du menu'
-      })
+      }))
     })
   ]).optional(),
   links: pageLinksSchema
@@ -65,7 +80,7 @@ export default defineContentConfig({
       type: 'page',
       source: {
         include: '**',
-        exclude: ['/index.md', '1.actualites/**', '3.evenements/**']
+        exclude: ['index.md', '1.actualites/**', '3.evenements/**']
       },
       schema: z.object({
         date: z.string().optional(),

@@ -7,7 +7,7 @@ defineProps<{
 
 useHead({
   htmlAttrs: {
-    lang: 'en'
+    lang: 'fr'
   }
 })
 

@@ -1,6 +1,5 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { ActiviteSlug } from '~/utils/activites'
-import { resolveActiviteSlug } from '~/utils/activites'
 
 export const CONTENT_COLLECTIONS = ['actualites', 'evenements', 'docs'] as const
 export type ContentCollectionName = typeof CONTENT_COLLECTIONS[number]
@@ -45,6 +44,14 @@ export function getStartOfToday(): number {
   return new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()
 }
 
+/** Date locale au format AAAA-MM-JJ (alignée sur isUpcomingByDate). */
+export function getTodayLocalISO(): string {
+  const today = new Date()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+  return `${today.getFullYear()}-${month}-${day}`
+}
+
 export function isUpcomingByDate(date: string | Date | undefined): boolean {
   const time = parseContentDate(date)
   return time > 0 && time >= getStartOfToday()
@@ -87,14 +94,15 @@ export function sortEvenementsByDate<T extends { date?: string | Date }>(items: 
 export async function queryUpcomingEvenementsForActivite(activite: ActiviteSlug) {
   const items = await queryCollection('evenements')
     .where('path', 'LIKE', '/evenements/%')
+    .where('activite', '=', activite)
+    .where('date', '>=', getTodayLocalISO())
+    .select('path', 'title', 'description', 'date', 'activite')
     .order('date', 'ASC')
     .all()
 
   const upcoming = items.filter(item =>
     !item.path.endsWith('/index')
     && !item.path.includes('.navigation')
-    && isUpcomingByDate(item.date)
-    && resolveActiviteSlug(item) === activite
   )
 
   return sortEvenementsByDate(upcoming)

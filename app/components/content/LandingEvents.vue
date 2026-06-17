@@ -1,18 +1,20 @@
 <script setup lang="ts">
-const { data: events } = useAsyncData('landing-events', () =>
+const { data: events } = await useAsyncData('landing-events', () =>
   queryCollection('evenements')
     .where('path', 'LIKE', '/evenements/%')
+    .where('date', '>=', getTodayLocalISO())
+    .select('path', 'title', 'description', 'date', 'activite')
     .order('date', 'ASC')
+    .limit(3)
     .all()
 )
 
 const filteredEvents = computed(() => {
-  const upcoming = events.value?.filter((event) => {
-    if (event.path.endsWith('/index') || event.path.includes('.navigation')) {
-      return false
-    }
-    return isUpcomingByDate(event.date)
-  })
+  const upcoming = events.value?.filter(event =>
+    !event.path.endsWith('/index')
+    && !event.path.includes('.navigation')
+    && isUpcomingByDate(event.date)
+  )
 
   return upcoming ? sortEvenementsByDate(upcoming) : []
 })
@@ -36,7 +38,7 @@ function formatDate(dateString: string | undefined): string {
     <template #body>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <UCard
-          v-for="event in filteredEvents?.slice(0, 3)"
+          v-for="event in filteredEvents"
           :key="event.path"
           variant="subtle"
         >
