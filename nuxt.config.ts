@@ -73,7 +73,7 @@ export default defineNuxtConfig({
     blob: {
       driver: 'cloudflare-r2',
       binding: 'BLOB',
-      bucketName: process.env.NUXT_HUB_BLOB_BUCKET_NAME || 'cercle-amical-media'
+      bucketName: process.env.S3_BUCKET || 'cercle-amical-media'
     }
   },
 
