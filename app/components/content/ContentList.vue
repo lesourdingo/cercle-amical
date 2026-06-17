@@ -14,6 +14,7 @@ const selectedActivite = ref<ActiviteFilter>(parseActiviteFilter(route.query.act
 
 const isEvenements = computed(() => props.path === '/evenements')
 const isActualites = computed(() => props.path === '/actualites')
+const isActivites = computed(() => props.path === '/activites')
 const showActiviteFilter = computed(() => isEvenements.value || isActualites.value)
 
 const listFallbackIcon = computed(() =>
@@ -152,6 +153,24 @@ watch(selectedActivite, (value) => {
           muted
         />
       </div>
+    </div>
+
+    <div
+      v-else-if="isActivites"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+    >
+      <EditorialActiviteCard
+        v-for="item in listItems"
+        :key="item.path"
+        :item="item"
+      />
+
+      <p
+        v-if="!listItems?.length"
+        class="text-muted col-span-full"
+      >
+        Aucune activité disponible.
+      </p>
     </div>
 
     <div

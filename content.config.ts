@@ -83,6 +83,20 @@ export default defineContentConfig({
         exclude: ['index.md', '1.actualites/**', '3.evenements/**']
       },
       schema: z.object({
+        title: property(z.string()).editor(studioEditor({
+          label: 'Titre',
+          description: 'Titre affiché sur la page et dans les listes'
+        })).optional(),
+        description: property(z.string()).editor(studioEditor({
+          input: 'textarea',
+          label: 'Résumé',
+          description: 'Court texte affiché sous le titre et dans les cartes'
+        })).optional(),
+        image: property(z.string()).editor(studioEditor({
+          input: 'media',
+          label: 'Image',
+          description: 'Image affichée sur la carte de l’activité'
+        })).optional(),
         date: z.string().optional(),
         links: pageLinksSchema
       })
