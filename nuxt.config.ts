@@ -39,8 +39,6 @@ export default defineNuxtConfig({
     }
   },
 
-  compatibilityDate: '2025-12-12',
-
   routeRules: {
     '/': { prerender: true },
     '/actualites/**': { prerender: true },
@@ -49,6 +47,8 @@ export default defineNuxtConfig({
     '/informations/**': { prerender: true },
     '/admin/**': { prerender: false }
   },
+
+  compatibilityDate: '2025-12-12',
 
   nitro: {
     prerender: {
