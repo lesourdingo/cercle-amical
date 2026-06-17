@@ -6,18 +6,5 @@
   "keep_vars": true,
   "assets": {
     "directory": "./.output/public"
-  },
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "cercel-amical-content",
-      "database_id": "73d1d050-a9ac-4660-b74f-bfd29a834325"
-    }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "BLOB",
-      "bucket_name": "cercle-amical-media"
-    }
-  ]
+  }
 }
