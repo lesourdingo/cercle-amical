@@ -2,7 +2,7 @@
 import type { EditorialIconItem } from '~/utils/activites'
 
 defineProps<{
-  item: EditorialIconItem & { path: string, title?: string, description?: string, image?: string }
+  item: EditorialIconItem & { path: string, title?: string, image?: string }
 }>()
 </script>
 
@@ -16,7 +16,7 @@ defineProps<{
       class="overflow-hidden h-full transition-colors hover:bg-elevated"
       :ui="{ body: 'p-0 sm:p-0' }"
     >
-      <div class="aspect-[16/10] overflow-hidden relative bg-elevated">
+      <div class="aspect-16/10 overflow-hidden relative bg-elevated">
         <NuxtImg
           v-if="item.image"
           :src="item.image"
@@ -26,7 +26,7 @@ defineProps<{
         />
         <div
           v-else
-          class="size-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5"
+          class="size-full flex items-center justify-center bg-linear-to-br from-primary/10 to-primary/5"
         >
           <EditorialActiviteIcon
             :item="item"
@@ -39,12 +39,6 @@ defineProps<{
         <h3 class="text-lg font-semibold text-highlighted group-hover:text-primary transition-colors">
           {{ item.title }}
         </h3>
-        <p
-          v-if="item.description"
-          class="text-muted text-sm line-clamp-2"
-        >
-          {{ item.description }}
-        </p>
         <span class="text-primary text-sm font-medium inline-flex items-center gap-1 pt-1">
           En savoir plus
           <UIcon
