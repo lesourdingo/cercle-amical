@@ -1,12 +1,18 @@
 <script setup lang="ts">
-const { data: news } = await useAsyncData('landing-news', () =>
-  queryCollection('actualites')
+const { actualitesEnabled } = useSiteFeatures()
+
+const { data: news } = await useAsyncData('landing-news', () => {
+  if (!actualitesEnabled) {
+    return Promise.resolve([])
+  }
+
+  return queryCollection('actualites')
     .where('path', 'LIKE', '/actualites/%')
     .select('path', 'title', 'description', 'date', 'activite')
     .order('date', 'DESC')
     .limit(3)
     .all()
-)
+})
 
 const filteredNews = computed(() =>
   (news.value ?? []).filter(article =>
@@ -29,6 +35,7 @@ function formatDate(dateString: string | undefined): string {
 
 <template>
   <UPageSection
+    v-if="actualitesEnabled"
     title="Dernières Actualités"
   >
     <template #body>

@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
-import { NAV_ORDER } from '~/utils/content-collections'
+import { getNavOrder } from '~/utils/content-collections'
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 const route = useRoute()
 const { header } = useAppConfig()
+const { actualitesEnabled } = useSiteFeatures()
+
+const navOrder = computed(() => getNavOrder(actualitesEnabled))
 
 function isNavItemActive(path: string) {
   if (route.path === path) return true
@@ -16,7 +19,7 @@ function isNavItemActive(path: string) {
 const navItems = computed<NavigationMenuItem[]>(() => {
   if (!navigation?.value) return []
   return navigation.value
-    .filter(item => NAV_ORDER.includes(item.path as (typeof NAV_ORDER)[number]))
+    .filter(item => navOrder.value.includes(item.path))
     .map((item) => {
       const isActivites = item.path === '/activites'
       const isActive = isNavItemActive(item.path)

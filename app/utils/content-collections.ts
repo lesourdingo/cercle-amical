@@ -19,6 +19,34 @@ export function sanitizeNavigationItems(items: ContentNavigationItem[]): Content
   })
 }
 
+export function isActualitesNavPath(path: string): boolean {
+  return path === '/actualites' || path.startsWith('/actualites/')
+}
+
+export function filterNavigationByFeatures(
+  items: ContentNavigationItem[],
+  actualitesEnabled = true
+): ContentNavigationItem[] {
+  if (actualitesEnabled) {
+    return items
+  }
+
+  return items
+    .filter(item => !isActualitesNavPath(item.path))
+    .map((item) => {
+      if (!item.children?.length) {
+        return item
+      }
+
+      const children = filterNavigationByFeatures(item.children, actualitesEnabled)
+      return children.length ? { ...item, children } : item
+    })
+}
+
+export function getNavOrder(actualitesEnabled = true): string[] {
+  return NAV_ORDER.filter(path => actualitesEnabled || path !== '/actualites')
+}
+
 export function collectionForPath(path: string): ContentCollectionName {
   if (path === '/actualites' || path.startsWith('/actualites/')) {
     return 'actualites'
@@ -131,21 +159,31 @@ export function sortNavigation(items: ContentNavigationItem[]) {
 }
 
 export async function queryMergedNavigation() {
+  const { features } = useAppConfig()
+  const actualitesEnabled = features?.actualites !== false
+
   const [actualites, docs, evenements] = await Promise.all([
-    queryCollectionNavigation('actualites').order('date', 'DESC'),
+    actualitesEnabled
+      ? queryCollectionNavigation('actualites').order('date', 'DESC')
+      : Promise.resolve(null),
     queryCollectionNavigation('docs'),
     queryCollectionNavigation('evenements').order('date', 'ASC')
   ])
-  return sanitizeNavigationItems(sortNavigation([
-    ...(actualites ?? []),
+
+  return sanitizeNavigationItems(sortNavigation(filterNavigationByFeatures([
+    ...(actualitesEnabled && actualites ? actualites : []),
     ...(docs ?? []),
     ...(evenements ?? [])
-  ]))
+  ], actualitesEnabled)))
 }
 
 export async function queryMergedSearchSections() {
+  const { features } = useAppConfig()
+  const collections = CONTENT_COLLECTIONS.filter(
+    name => name !== 'actualites' || features?.actualites !== false
+  )
   const sections = await Promise.all(
-    CONTENT_COLLECTIONS.map(name => queryCollectionSearchSections(name))
+    collections.map(name => queryCollectionSearchSections(name))
   )
   return sections.flat()
 }

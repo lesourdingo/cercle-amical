@@ -8,8 +8,13 @@ definePageMeta({
 
 const route = useRoute()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+const { actualitesEnabled } = useSiteFeatures()
 
 const collection = collectionForPath(route.path)
+
+if (collection === 'actualites' && !actualitesEnabled) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
 
 const { data: page } = await useAsyncData(route.path, () => queryContentPage(route.path))
 if (!page.value) {
@@ -70,7 +75,7 @@ defineOgImageComponent('Docs', {
   <UPage v-if="page">
     <UPageHeader
       :title="page.title"
-      :description="page.description"
+      :description="activiteSlug ? undefined : page.description"
       :headline="headline"
     >
       <template

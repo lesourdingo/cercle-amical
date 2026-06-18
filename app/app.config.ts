@@ -1,4 +1,8 @@
 export default defineAppConfig({
+  /** Mettre `actualites: true` pour réafficher la section Actualités. */
+  features: {
+    actualites: false
+  },
   ui: {
     colors: {
       primary: 'blue',

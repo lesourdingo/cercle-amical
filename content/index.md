@@ -50,13 +50,13 @@ features:
   - title: Voyages
     description: Découvrez de nouvelles destinations avec nos voyages en groupe.
     icon: i-lucide-plane
-description: Le Cercle Amical propose une variété d'activités pour tous les
-  goûts et tous les âges.
-title: Découvrez nos activités
 links:
   - label: Voir toutes les activités
     to: /activites
     trailingIcon: i-lucide-arrow-right
+description: Le Cercle Amical propose une variété d'activités pour tous les
+  goûts et tous les âges.
+title: Découvrez nos activités
 ---
 ::
 

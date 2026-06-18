@@ -16,12 +16,17 @@ useSeoMeta({
   description: 'We are sorry but this page could not be found.'
 })
 
+const { actualitesEnabled } = useSiteFeatures()
+
 const { data: navigation } = await useAsyncData('navigation', () => queryMergedNavigation())
+const visibleNavigation = computed(() =>
+  filterNavigationByFeatures(navigation.value ?? [], actualitesEnabled)
+)
 const { data: files } = useLazyAsyncData('search', () => queryMergedSearchSections(), {
   server: false
 })
 
-provide('navigation', navigation)
+provide('navigation', visibleNavigation)
 </script>
 
 <template>
@@ -35,7 +40,7 @@ provide('navigation', navigation)
     <ClientOnly>
       <LazyUContentSearch
         :files="files"
-        :navigation="navigation"
+        :navigation="visibleNavigation"
       />
     </ClientOnly>
   </UApp>

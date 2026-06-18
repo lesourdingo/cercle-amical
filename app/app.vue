@@ -1,13 +1,20 @@
 <script setup lang="ts">
 const { seo } = useAppConfig()
+const { actualitesEnabled } = useSiteFeatures()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryMergedNavigation())
+const visibleNavigation = computed(() =>
+  filterNavigationByFeatures(navigation.value ?? [], actualitesEnabled)
+)
 const { data: files } = useLazyAsyncData('search', () => queryMergedSearchSections(), {
   server: false
 })
 
 if (import.meta.prerender) {
-  const collections = ['docs', 'actualites', 'evenements'] as const
+  type PrerenderCollection = 'docs' | 'actualites' | 'evenements'
+  const collections: PrerenderCollection[] = actualitesEnabled
+    ? ['docs', 'actualites', 'evenements']
+    : ['docs', 'evenements']
   const pages = await Promise.all(
     collections.map(collection => queryCollection(collection).select('path').all())
   )
@@ -36,7 +43,7 @@ useSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-provide('navigation', navigation)
+provide('navigation', visibleNavigation)
 </script>
 
 <template>
@@ -56,7 +63,7 @@ provide('navigation', navigation)
     <ClientOnly>
       <LazyUContentSearch
         :files="files"
-        :navigation="navigation"
+        :navigation="visibleNavigation"
       />
     </ClientOnly>
   </UApp>
