@@ -15,6 +15,6 @@ export function useActiviteGallery(slug: ActiviteSlug | undefined) {
         return [] as ActiviteGalleryImage[]
       }
     },
-    { default: () => [] as ActiviteGalleryImage[] }
+    { default: () => [] as ActiviteGalleryImage[], server: false }
   )
 }
