@@ -29,36 +29,7 @@ title: Le Cercle Amical
 
 :landing-news
 
-::u-page-section
----
-features:
-  - title: Belote
-    description: Venez jouer à la belote dans une ambiance conviviale et amicale.
-    icon: i-lucide-spade
-  - title: Tarot
-    description: Participez à des parties de tarot entre passionnés.
-    icon: i-lucide-club
-  - title: Pétanque
-    description: Amusez-vous en jouant à la pétanque lors de nos rencontres.
-    icon: i-lucide-circle
-  - title: Repas
-    description: Partagez des moments conviviaux autour de bons repas.
-    icon: i-lucide-utensils
-  - title: Sorties
-    description: Explorez de nouveaux endroits lors de nos sorties organisées.
-    icon: i-lucide-map-pin
-  - title: Voyages
-    description: Découvrez de nouvelles destinations avec nos voyages en groupe.
-    icon: i-lucide-plane
-links:
-  - label: Voir toutes les activités
-    to: /activites
-    trailingIcon: i-lucide-arrow-right
-description: Le Cercle Amical propose une variété d'activités pour tous les
-  goûts et tous les âges.
-title: Découvrez nos activités
----
-::
+:landing-activites
 
 ::u-page-section
 ---
