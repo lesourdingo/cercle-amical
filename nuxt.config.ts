@@ -35,7 +35,8 @@ export default defineNuxtConfig({
     // Alternative to STUDIO_GOOGLE_MODERATORS — set NUXT_STUDIO_GOOGLE_MODERATORS on Cloudflare
     studioGoogleModerators: '',
     public: {
-      siteUrl: ''
+      siteUrl: '',
+      mediaUrl: process.env.S3_PUBLIC_URL || 'https://images.cercle-amical.fr'
     }
   },
 

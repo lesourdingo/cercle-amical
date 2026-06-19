@@ -66,6 +66,10 @@ const { data: upcomingEvents } = activiteSlug
 
 const nextUpcomingEvent = computed(() => upcomingEvents.value?.[0])
 
+const { data: galleryImages } = activiteSlug
+  ? await useActiviteGallery(activiteSlug)
+  : { data: ref([]) }
+
 defineOgImageComponent('Docs', {
   headline: headline.value
 })
@@ -109,6 +113,12 @@ defineOgImageComponent('Docs', {
         v-if="nextUpcomingEvent && activiteSlug"
         :event="nextUpcomingEvent"
         :activite="activiteSlug"
+      />
+
+      <ActiviteGallery
+        v-if="galleryImages?.length"
+        :images="galleryImages"
+        :title="page.title"
       />
 
       <USeparator v-if="surround?.length" />
