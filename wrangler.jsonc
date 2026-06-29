@@ -6,18 +6,5 @@
   "keep_vars": true,
   "assets": {
     "directory": "./.output/public"
-  },
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_id": "local-dev",
-      "database_name": "cercle-amical-local"
-    }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "BLOB",
-      "bucket_name": "cercle-amical-media-local"
-    }
-  ]
+  }
 }

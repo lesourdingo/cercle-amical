@@ -149,7 +149,8 @@ export default defineNuxtConfig({
     },
     route: '/admin', // default: '/_studio',
     media: {
-      external: true,
+      // R2 en prod ; /public en dev local (évite les bindings BLOB manquants)
+      external: process.env.NODE_ENV === 'production',
       prefix: 'studio'
     }
   }
