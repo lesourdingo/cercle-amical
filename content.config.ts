@@ -52,7 +52,11 @@ const editorialPageSchema = z.object({
     z.object({
       icon: z.string().optional()
     })
-  ]).optional()).editor(studioEditor({ hidden: true }))
+  ]).optional()).editor(studioEditor({ hidden: true })),
+  seo: property(z.object({
+    title: z.string().optional(),
+    description: z.string().optional()
+  }).optional()).editor(studioEditor({ hidden: true }))
 })
 
 export default defineContentConfig({

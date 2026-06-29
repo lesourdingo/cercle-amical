@@ -27,8 +27,6 @@ title: Le Cercle Amical
 
 :landing-events
 
-:landing-news
-
 :landing-activites
 
 ::u-page-section

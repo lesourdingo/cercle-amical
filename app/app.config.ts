@@ -1,5 +1,5 @@
 export default defineAppConfig({
-  /** Mettre `actualites: true` pour réafficher la section Actualités. */
+  /** Mettre `actualites: true` et `:landing-news` dans content/index.md pour réafficher la section Actualités. */
   features: {
     actualites: false
   },
