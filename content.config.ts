@@ -12,51 +12,47 @@ type StudioEditorOptions = {
   hidden?: boolean
 }
 
-/** Studio field metadata — richer than @nuxt/content EditorOptions types. */
+/** Studio field metadata â€” richer than @nuxt/content EditorOptions types. */
 function studioEditor<T extends z.ZodTypeAny>(options: StudioEditorOptions) {
   return options as Parameters<ReturnType<typeof property<T>>['editor']>[0]
 }
 
 const pageLinksSchema = z.array(z.object({
-  label: property(z.string()).editor(studioEditor({ label: 'Libellé' })),
+  label: property(z.string()).editor(studioEditor({ label: 'LibellÃ©' })),
   icon: property(z.string()).editor(studioEditor({
     input: 'icon',
     iconLibraries: ['lucide', 'simple-icons'],
-    label: 'Icône'
+    label: 'IcÃ´ne'
   })),
   to: property(z.string()).editor(studioEditor({ label: 'Lien', description: 'Chemin interne ou URL' })),
   target: z.string().optional()
 })).optional()
 
-/** Schéma partagé pour les articles et pages d’index (formulaire Studio). */
+/** SchÃ©ma partagÃ© pour les articles et pages dâ€™index (formulaire Studio). */
 const editorialPageSchema = z.object({
   title: property(z.string()).editor(studioEditor({
     label: 'Titre',
-    description: 'Titre affiché sur la page et dans les listes'
+    description: 'Titre affichÃ© sur la page et dans les listes'
   })),
   description: property(z.string()).editor(studioEditor({
     input: 'textarea',
-    label: 'Résumé',
-    description: 'Court texte affiché sous le titre et dans les cartes'
+    label: 'RÃ©sumÃ©',
+    description: 'Court texte affichÃ© sous le titre et dans les cartes'
   })),
   date: property(z.date()).editor(studioEditor({
     label: 'Date',
-    description: 'Date de publication (actualités) ou de l’événement'
+    description: 'Date de publication (actualitÃ©s) ou de lâ€™Ã©vÃ©nement'
   })).optional(),
   activite: property(z.enum(ACTIVITE_SLUGS)).editor(studioEditor({
-    label: 'Activité',
-    description: 'Détermine l’icône affichée (identique à celle de la page Activité correspondante)'
+    label: 'ActivitÃ©',
+    description: 'DÃ©termine lâ€™icÃ´ne affichÃ©e (identique Ã  celle de la page ActivitÃ© correspondante)'
   })).optional(),
-  seo: property(z.object({
-    title: z.string().optional(),
-    description: z.string().optional()
-  }).optional()).editor(studioEditor({ hidden: true })),
   navigation: property(z.union([
     z.literal(false),
     z.object({
       icon: z.string().optional()
     })
-  ]).optional().default(false)).editor(studioEditor({ hidden: true }))
+  ]).optional()).editor(studioEditor({ hidden: true }))
 })
 
 export default defineContentConfig({
@@ -84,17 +80,17 @@ export default defineContentConfig({
       schema: z.object({
         title: property(z.string()).editor(studioEditor({
           label: 'Titre',
-          description: 'Titre affiché sur la page et dans les listes'
+          description: 'Titre affichÃ© sur la page et dans les listes'
         })).optional(),
         description: property(z.string()).editor(studioEditor({
           input: 'textarea',
-          label: 'Résumé',
-          description: 'Court texte affiché sous le titre et dans les cartes'
+          label: 'RÃ©sumÃ©',
+          description: 'Court texte affichÃ© sous le titre et dans les cartes'
         })).optional(),
         image: property(z.string()).editor(studioEditor({
           input: 'media',
           label: 'Image',
-          description: 'Image affichée sur la carte de l’activité'
+          description: 'Image affichÃ©e sur la carte de lâ€™activitÃ©'
         })).optional(),
         date: z.string().optional(),
         links: pageLinksSchema
