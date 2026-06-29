@@ -2,7 +2,6 @@
 title: Bienvenue
 description: Bienvenue sur notre site
 date: 2025-01-01
-navigation: false
 ---
 
 Nous sommes heureux de vous accueillir sur le nouveau site du **Cercle Amical de Saint Gildas de Rhuys**.

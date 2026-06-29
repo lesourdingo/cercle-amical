@@ -3,7 +3,6 @@ title: Nouveau site internet
 description: Nouveau site internet
 activite: autre
 date: 2025-12-01
-navigation: false
 ---
 
 Le **Cercle Amical de Saint Gildas de Rhuys** est heureux de vous présenter son nouveau site internet.

@@ -9,11 +9,12 @@ type StudioEditorOptions = {
   tooltip?: string
   input?: 'media' | 'icon' | 'textarea'
   iconLibraries?: string[]
+  hidden?: boolean
 }
 
 /** Studio field metadata — richer than @nuxt/content EditorOptions types. */
-function studioEditor(options: StudioEditorOptions) {
-  return options as Parameters<ReturnType<typeof property<z.ZodString>>['editor']>[0]
+function studioEditor<T extends z.ZodTypeAny>(options: StudioEditorOptions) {
+  return options as Parameters<ReturnType<typeof property<T>>['editor']>[0]
 }
 
 const pageLinksSchema = z.array(z.object({
@@ -38,26 +39,29 @@ const editorialPageSchema = z.object({
     label: 'Résumé',
     description: 'Court texte affiché sous le titre et dans les cartes'
   })),
-  date: property(z.string().date()).editor(studioEditor({
+  date: property(z.date()).editor(studioEditor({
     label: 'Date',
-    description: 'Date de publication (actualités) ou de l’événement',
-    tooltip: 'Format AAAA-MM-JJ'
+    description: 'Date de publication (actualités) ou de l’événement'
   })).optional(),
   activite: property(z.enum(ACTIVITE_SLUGS)).editor(studioEditor({
     label: 'Activité',
     description: 'Détermine l’icône affichée (identique à celle de la page Activité correspondante)'
   })).optional(),
-  navigation: z.union([
+  image: property(z.string()).editor(studioEditor({
+    input: 'media',
+    label: 'Image',
+    description: 'Image affichée sur la carte et la page'
+  })).optional(),
+  seo: property(z.object({
+    title: z.string().optional(),
+    description: z.string().optional()
+  }).optional()).editor(studioEditor({ hidden: true })),
+  navigation: property(z.union([
     z.literal(false),
     z.object({
-      icon: property(z.string()).editor(studioEditor({
-        input: 'icon',
-        iconLibraries: ['lucide'],
-        label: 'Icône du menu'
-      }))
+      icon: z.string().optional()
     })
-  ]).optional(),
-  links: pageLinksSchema
+  ]).optional().default(false)).editor(studioEditor({ hidden: true }))
 })
 
 export default defineContentConfig({

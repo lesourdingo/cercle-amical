@@ -21,9 +21,9 @@ const filteredNews = computed(() =>
   )
 )
 
-function formatDate(dateString: string | undefined): string {
-  if (!dateString) return ''
-  const date = new Date(dateString)
+function formatDate(dateValue: string | Date | undefined): string {
+  if (!dateValue) return ''
+  const date = new Date(dateValue)
   if (Number.isNaN(date.getTime())) return ''
   return date.toLocaleDateString('fr-FR', {
     day: 'numeric',
@@ -64,7 +64,7 @@ function formatDate(dateString: string | undefined): string {
                     name="i-lucide-calendar"
                     class="size-3.5"
                   />
-                  {{ formatDate(article.date as string) }}
+                  {{ formatDate(article.date) }}
                 </p>
               </div>
             </div>
