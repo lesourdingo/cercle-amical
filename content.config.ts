@@ -47,11 +47,6 @@ const editorialPageSchema = z.object({
     label: 'Activité',
     description: 'Détermine l’icône affichée (identique à celle de la page Activité correspondante)'
   })).optional(),
-  image: property(z.string()).editor(studioEditor({
-    input: 'media',
-    label: 'Image',
-    description: 'Image affichée sur la carte et la page'
-  })).optional(),
   seo: property(z.object({
     title: z.string().optional(),
     description: z.string().optional()
