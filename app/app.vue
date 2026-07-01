@@ -30,7 +30,9 @@ useHead({
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
   ],
   link: [
-    { rel: 'icon', href: '/favicon.ico' }
+    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/android-chrome-192x192.png' },
+    { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }
   ],
   htmlAttrs: {
     lang: 'fr'

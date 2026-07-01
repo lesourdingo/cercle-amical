@@ -10,15 +10,15 @@ category: Informations
 
 ### Responsables des activités
 
-- **Repas et animations** : Eric DETUNE — 07 82 11 96 20
-- **Loto** : Nicole VALLE — 06 32 32 58 04
-- **Tarot / Belote** : Eric DETUNE — 07 82 11 96 20
-- **Pétanque / Boules bretonnes** : Brigitte ROUXEL — 06 11 34 13 92
-- **Sorties / Voyages** : Danièle CHEVALIER — 06 61 83 79 37
+- **Repas et animations** : Eric DETUNE
+- **Loto** : Nicole VALLE
+- **Tarot / Belote** : Eric DETUNE
+- **Pétanque / Boules bretonnes** : Brigitte ROUXEL
+- **Sorties / Voyages** : Danièle CHEVALIER
 
 ### Inscriptions
 
-- **Pour les inscriptions** : Agnès CERSOY — 06 29 18 21 18
+- **Pour les inscriptions** : Agnès CERSOY
 
 ### Bureau de l'association
 
@@ -51,7 +51,7 @@ En devenant membre, vous bénéficiez de :
 ### Comment adhérer
 
 1. Téléchargez le [formulaire d'adhésion](/documents/formulaire-adhesion.pdf)
-2. Remplissez-le et contactez **Agnès CERSOY** au **06 29 18 21 18** pour finaliser votre inscription
+2. Remplissez-le et contactez **Agnès CERSOY** pour finaliser votre inscription
 3. Effectuez le paiement par virement ou chèque
 4. Vous recevrez votre carte de membre par courrier
 

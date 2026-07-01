@@ -32,9 +32,10 @@ export default defineAppConfig({
     title: 'Cercle Amical',
     to: '/',
     logo: {
-      alt: '',
-      light: '',
-      dark: ''
+      alt: 'Cercle Amical',
+      light: '/logo.png',
+      dark: '/logo.png',
+      hero: '/logo-big.png'
     },
     colorMode: true
   },

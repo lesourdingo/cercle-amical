@@ -59,13 +59,25 @@ const navItems = computed<NavigationMenuItem[]>(() => {
       v-if="header?.logo?.dark || header?.logo?.light || header?.title"
       #title
     >
-      <UColorModeImage
+      <div
         v-if="header?.logo?.dark || header?.logo?.light"
-        :light="header?.logo?.light!"
-        :dark="header?.logo?.dark!"
-        :alt="header?.logo?.alt"
-        class="h-6 w-auto shrink-0"
-      />
+        class="flex items-center gap-2.5"
+      >
+        <img
+          :src="header?.logo?.light || header?.logo?.dark"
+          alt=""
+          aria-hidden="true"
+          class="h-10 w-auto shrink-0"
+          width="40"
+          height="40"
+        />
+        <span
+          v-if="header?.title"
+          class="font-semibold text-highlighted"
+        >
+          {{ header.title }}
+        </span>
+      </div>
 
       <span v-else-if="header?.title">
         {{ header.title }}
