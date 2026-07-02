@@ -30,10 +30,6 @@ links:
   - label: Adhérer maintenant
     to: /presentation-du-club
     trailingIcon: i-lucide-arrow-right
-  - label: Voir toutes les actualités
-    to: /actualites
-    variant: subtle
-    icon: i-lucide-newspaper
 description: Devenez membre et participez à la vie de notre association. Tarifs
   avantageux et nombreux avantages vous attendent.
 title: Rejoignez Le Cercle Amical

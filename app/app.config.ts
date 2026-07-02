@@ -16,12 +16,14 @@ export default defineAppConfig({
     },
     pageHero: {
       slots: {
-        container: 'flex flex-col lg:grid py-16 sm:py-20 lg:py-24 gap-16 sm:gap-y-24'
+        container: 'flex flex-col lg:grid py-12 sm:py-16 lg:py-20 gap-10 sm:gap-y-16',
+        body: 'mt-6',
+        footer: 'mt-6'
       }
     },
     pageSection: {
       slots: {
-        container: 'flex flex-col lg:grid py-10 sm:py-16 lg:py-20 gap-8 sm:gap-16'
+        container: 'flex flex-col lg:grid py-6 sm:py-10 lg:py-14 gap-6 sm:gap-10'
       }
     }
   },
@@ -39,23 +41,42 @@ export default defineAppConfig({
     colorMode: false
   },
   footer: {
-    credits: `Built with Nuxt UI • © ${new Date().getFullYear()}`,
+    tagline: 'Association conviviale de Saint Gildas de Rhuys depuis 1983.',
+    credits: `© ${new Date().getFullYear()} Cercle Amical de Saint Gildas de Rhuys`,
+    madeBy: {
+      name: 'Kevin Rumeur',
+      to: 'https://x.com/lesourdingo'
+    },
     colorMode: false,
-    links: [{
-      'icon': 'i-simple-icons-discord',
-      'to': 'https://go.nuxt.com/discord',
-      'target': '_blank',
-      'aria-label': 'Nuxt on Discord'
+    columns: [{
+      label: 'Navigation',
+      children: [{
+        label: 'Actualités',
+        to: '/actualites'
+      }, {
+        label: 'Activités',
+        to: '/activites'
+      }, {
+        label: 'Bulletin d\'information',
+        to: '/bulletin-d-information'
+      }, {
+        label: 'Présentation du club',
+        to: '/presentation-du-club'
+      }]
     }, {
-      'icon': 'i-simple-icons-x',
-      'to': 'https://go.nuxt.com/x',
-      'target': '_blank',
-      'aria-label': 'Nuxt on X'
-    }, {
-      'icon': 'i-simple-icons-github',
-      'to': 'https://github.com/nuxt/ui',
-      'target': '_blank',
-      'aria-label': 'Nuxt UI on GitHub'
+      label: 'Contact',
+      children: [{
+        label: 'cercle.amical.saint.gildas@gmail.com',
+        to: 'mailto:cercle.amical.saint.gildas@gmail.com',
+        icon: 'i-lucide-mail'
+      }, {
+        label: 'Adhérer au club',
+        to: '/presentation-du-club',
+        icon: 'i-lucide-user-plus'
+      }, {
+        label: 'Saint Gildas de Rhuys (56730)',
+        icon: 'i-lucide-map-pin'
+      }]
     }]
   },
   toc: {
