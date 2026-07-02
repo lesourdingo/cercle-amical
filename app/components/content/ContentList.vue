@@ -9,23 +9,11 @@ const props = defineProps<{
 const route = useRoute()
 const { filterOptions, matchesFilter, parseActiviteFilter } = useActivites()
 
-const showPastEvents = ref(false)
 const selectedActivite = ref<ActiviteFilter>(parseActiviteFilter(route.query.activite))
 
-const isEvenements = computed(() => props.path === '/evenements')
 const isActualites = computed(() => props.path === '/actualites')
 const isActivites = computed(() => props.path === '/activites')
-const showActiviteFilter = computed(() => isEvenements.value || isActualites.value)
-
-const listFallbackIcon = computed(() =>
-  isActualites.value ? 'i-lucide-newspaper' : 'i-lucide-calendar'
-)
-
-const dateOrder = computed(() => {
-  if (props.path === '/evenements') return 'ASC' as const
-  if (props.path === '/actualites') return 'DESC' as const
-  return undefined
-})
+const showActiviteFilter = computed(() => isActualites.value)
 
 const { data: items } = await useAsyncData(`content-list-${props.path}`, () =>
   queryContentList(props.path)
@@ -44,26 +32,14 @@ function filterItems<T extends { activite?: string, title?: string, description?
 }
 
 const upcomingItems = computed(() => {
-  if (!isEvenements.value || !baseItems.value) return []
+  if (!isActualites.value || !baseItems.value) return []
   const upcoming = baseItems.value.filter(item => isUpcomingByDate(item.date))
-  return filterItems(sortEvenementsByDate(upcoming))
-})
-
-const pastItems = computed(() => {
-  if (!isEvenements.value || !baseItems.value) return []
-  const past = baseItems.value.filter(item => isPastByDate(item.date))
-  return filterItems(sortByDate(past, 'DESC'))
+  return filterItems(sortActualitesByDate(upcoming))
 })
 
 const listItems = computed(() => {
-  if (!baseItems.value?.length || isEvenements.value) return []
-
-  let result = baseItems.value
-  if (dateOrder.value) {
-    result = sortByDate(result, dateOrder.value)
-  }
-
-  return filterItems(result)
+  if (!baseItems.value?.length || isActualites.value) return []
+  return filterItems(baseItems.value)
 })
 
 const isFiltered = computed(() => selectedActivite.value !== ALL_ACTIVITES_FILTER)
@@ -103,7 +79,7 @@ watch(selectedActivite, (value) => {
     />
 
     <div
-      v-if="isEvenements"
+      v-if="isActualites"
       class="space-y-6"
     >
       <div class="space-y-4">
@@ -119,39 +95,8 @@ watch(selectedActivite, (value) => {
           v-if="!upcomingItems.length"
           class="text-muted"
         >
-          {{ isFiltered ? 'Aucun événement à venir pour cette activité.' : 'Aucun événement à venir pour le moment.' }}
+          {{ isFiltered ? 'Aucune actualité à venir pour cette activité.' : 'Aucune actualité à venir pour le moment.' }}
         </p>
-      </div>
-
-      <div
-        v-if="pastItems.length"
-        class="flex justify-center"
-      >
-        <UButton
-          variant="subtle"
-          :trailing-icon="showPastEvents ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
-          @click="showPastEvents = !showPastEvents"
-        >
-          {{ showPastEvents ? 'Masquer les événements passés' : 'Voir les événements passés' }}
-        </UButton>
-      </div>
-
-      <div
-        v-if="showPastEvents && pastItems.length"
-        class="space-y-4"
-      >
-        <h2 class="text-lg font-semibold text-highlighted">
-          Événements passés
-        </h2>
-
-        <EditorialListCard
-          v-for="item in pastItems"
-          :key="item.path"
-          :item="item"
-          link-label="En savoir plus"
-          fallback-icon="i-lucide-calendar"
-          muted
-        />
       </div>
     </div>
 
@@ -181,14 +126,14 @@ watch(selectedActivite, (value) => {
         v-for="item in listItems"
         :key="item.path"
         :item="item"
-        :fallback-icon="listFallbackIcon"
+        fallback-icon="i-lucide-file-text"
       />
 
       <p
         v-if="!listItems?.length"
         class="text-muted"
       >
-        {{ isFiltered ? 'Aucune actualité pour cette activité.' : 'Aucun contenu disponible.' }}
+        Aucun contenu disponible.
       </p>
     </div>
   </div>

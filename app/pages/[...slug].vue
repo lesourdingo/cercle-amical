@@ -26,10 +26,8 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
     fields: ['description']
   })
 
-  if (collection === 'evenements') {
+  if (collection === 'actualites') {
     query = query.order('date', 'ASC')
-  } else if (collection === 'actualites') {
-    query = query.order('date', 'DESC')
   }
 
   return query
@@ -48,19 +46,18 @@ useSeoMeta({
 const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path))
 
 const pageFallbackIcon = computed(() => {
-  if (collection === 'actualites') return 'i-lucide-newspaper'
-  if (collection === 'evenements') return 'i-lucide-calendar'
+  if (collection === 'actualites') return 'i-lucide-calendar'
   return 'i-lucide-file-text'
 })
 
-const showActiviteIcon = computed(() => collection === 'actualites' || collection === 'evenements')
+const showActiviteIcon = computed(() => collection === 'actualites')
 
 const activiteSlug = activiteSlugFromPagePath(route.path)
 
 const { data: upcomingEvents } = activiteSlug
   ? await useAsyncData(
       `activite-events-${activiteSlug}`,
-      () => queryUpcomingEvenementsForActivite(activiteSlug)
+      () => queryUpcomingActualitesForActivite(activiteSlug)
     )
   : { data: ref([]) }
 

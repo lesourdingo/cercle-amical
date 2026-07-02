@@ -1,13 +1,13 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { ActiviteSlug } from '~/utils/activites'
 
-export const CONTENT_COLLECTIONS = ['actualites', 'evenements', 'docs'] as const
+export const CONTENT_COLLECTIONS = ['actualites', 'docs'] as const
 export type ContentCollectionName = typeof CONTENT_COLLECTIONS[number]
 
-export const NAV_ORDER = ['/actualites', '/evenements', '/activites', '/presentation-du-club'] as const
+export const NAV_ORDER = ['/actualites', '/activites', '/bulletin-d-information', '/presentation-du-club'] as const
 
 /** Sections sans sous-menu dans la barre de navigation (évite le bouton chevron Nuxt UI). */
-export const NAV_WITHOUT_CHILDREN = ['/actualites', '/evenements', '/presentation-du-club'] as const
+export const NAV_WITHOUT_CHILDREN = ['/actualites', '/bulletin-d-information', '/presentation-du-club'] as const
 
 export function sanitizeNavigationItems(items: ContentNavigationItem[]): ContentNavigationItem[] {
   return items.map((item) => {
@@ -50,9 +50,6 @@ export function getNavOrder(actualitesEnabled = true): string[] {
 export function collectionForPath(path: string): ContentCollectionName {
   if (path === '/actualites' || path.startsWith('/actualites/')) {
     return 'actualites'
-  }
-  if (path === '/evenements' || path.startsWith('/evenements/')) {
-    return 'evenements'
   }
   return 'docs'
 }
@@ -98,8 +95,8 @@ export function sortByDate<T extends { date?: string | Date }>(
   return [...items].sort((a, b) => (parseContentDate(a.date) - parseContentDate(b.date)) * sign)
 }
 
-/** Événements : année en cours d’abord (ordre chronologique), puis les autres années. */
-export function sortEvenementsByDate<T extends { date?: string | Date }>(items: T[]): T[] {
+/** Actualités datées : année en cours d’abord (ordre chronologique), puis les autres années. */
+export function sortActualitesByDate<T extends { date?: string | Date }>(items: T[]): T[] {
   const year = new Date().getFullYear()
   const startOfYear = new Date(year, 0, 1).getTime()
   const endOfYear = new Date(year + 1, 0, 1).getTime()
@@ -118,10 +115,10 @@ export function sortEvenementsByDate<T extends { date?: string | Date }>(items: 
   })
 }
 
-/** Événements à venir pour une activité donnée. */
-export async function queryUpcomingEvenementsForActivite(activite: ActiviteSlug) {
-  const items = await queryCollection('evenements')
-    .where('path', 'LIKE', '/evenements/%')
+/** Actualités à venir pour une activité donnée. */
+export async function queryUpcomingActualitesForActivite(activite: ActiviteSlug) {
+  const items = await queryCollection('actualites')
+    .where('path', 'LIKE', '/actualites/%')
     .where('activite', '=', activite)
     .where('date', '>=', getTodayLocalISO())
     .select('path', 'title', 'description', 'date', 'activite')
@@ -133,7 +130,7 @@ export async function queryUpcomingEvenementsForActivite(activite: ActiviteSlug)
     && !item.path.includes('.navigation')
   )
 
-  return sortEvenementsByDate(upcoming)
+  return sortActualitesByDate(upcoming)
 }
 
 /** Liste les pages d’une section, triées par date quand c’est pertinent. */
@@ -141,10 +138,8 @@ export function queryContentList(path: string) {
   const collection = collectionForPath(path)
   let query = queryCollection(collection).where('path', 'LIKE', `${path}/%`)
 
-  if (path === '/evenements') {
+  if (path === '/actualites') {
     query = query.order('date', 'ASC')
-  } else if (path === '/actualites') {
-    query = query.order('date', 'DESC')
   }
 
   return query.all()
@@ -162,18 +157,16 @@ export async function queryMergedNavigation() {
   const { features } = useAppConfig()
   const actualitesEnabled = features?.actualites !== false
 
-  const [actualites, docs, evenements] = await Promise.all([
+  const [actualites, docs] = await Promise.all([
     actualitesEnabled
-      ? queryCollectionNavigation('actualites').order('date', 'DESC')
+      ? queryCollectionNavigation('actualites').order('date', 'ASC')
       : Promise.resolve(null),
-    queryCollectionNavigation('docs'),
-    queryCollectionNavigation('evenements').order('date', 'ASC')
+    queryCollectionNavigation('docs')
   ])
 
   return sanitizeNavigationItems(sortNavigation(filterNavigationByFeatures([
     ...(actualitesEnabled && actualites ? actualites : []),
-    ...(docs ?? []),
-    ...(evenements ?? [])
+    ...(docs ?? [])
   ], actualitesEnabled)))
 }
 

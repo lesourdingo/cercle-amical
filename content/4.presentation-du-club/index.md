@@ -3,7 +3,7 @@ title: Présentation du club
 date: 2025-01-10
 description: Histoire, activités, gouvernance et adhésion au Cercle Amical de Saint Gildas de Rhuys
 navigation:
-  icon: i-lucide-building-2
+  icon: i-lucide-heart-handshake
 author: Secrétariat
 category: Présentation du club
 ---
@@ -47,7 +47,7 @@ La **soirée irlandaise** et la **soirée Beaujolais nouveau**.
 
 **1 ou 2 voyages** en France ou à l'étranger, de 7 à 8 jours.
 
-Consultez les pages [Activités](/activites) et [Événements](/evenements) pour le détail des prochaines dates.
+Consultez les pages [Activités](/activites) et [Actualités](/actualites) pour le détail des prochaines dates.
 
 ## Responsables des activités
 
@@ -79,7 +79,7 @@ En devenant membre, vous bénéficiez de :
 
 ### Comment adhérer
 
-1. Téléchargez le [bulletin d'adhésion](/documents/bulletin-adhesion.pdf)
+1. Téléchargez le :adhesion-bulletin-link
 2. Remplissez-le et envoyez-le à [cercle.amical.saint.gildas@gmail.com](mailto:cercle.amical.saint.gildas@gmail.com) pour finaliser votre inscription
 3. Effectuez le paiement en espèce, chèque ou virement
 

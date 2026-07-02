@@ -47,8 +47,8 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { prerender: true },
     '/actualites/**': { prerender: true },
-    '/evenements/**': { prerender: true },
     '/activites/**': { prerender: true },
+    '/bulletin-d-information/**': { prerender: true },
     '/presentation-du-club/**': { prerender: true },
     '/admin/**': { prerender: false }
   },
@@ -101,7 +101,7 @@ export default defineNuxtConfig({
     description: 'Site du Cercle Amical de Saint Gildas de Rhuys.',
     full: {
       title: 'Cercle Amical - Contenu complet',
-      description: 'Actualités, événements, activités et informations du Cercle Amical.'
+      description: 'Actualités, activités et informations du Cercle Amical.'
     },
     sections: [
       {
@@ -112,17 +112,17 @@ export default defineNuxtConfig({
         ]
       },
       {
-        title: 'Événements',
-        contentCollection: 'evenements',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/evenements/%' }
-        ]
-      },
-      {
         title: 'Activités',
         contentCollection: 'docs',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/activites/%' }
+        ]
+      },
+      {
+        title: 'Bulletin d\'information',
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/bulletin-d-information%' }
         ]
       },
       {

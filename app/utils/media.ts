@@ -6,6 +6,13 @@ export type ActiviteGalleryImage = {
   alt: string
 }
 
+export type BulletinPdf = {
+  url: string
+  pathname: string
+  title: string
+  sortKey: string
+}
+
 export function isImagePathname(pathname: string): boolean {
   return IMAGE_EXTENSION.test(pathname)
 }

@@ -11,10 +11,10 @@ const { data: files } = useLazyAsyncData('search', () => queryMergedSearchSectio
 })
 
 if (import.meta.prerender) {
-  type PrerenderCollection = 'docs' | 'actualites' | 'evenements'
+  type PrerenderCollection = 'docs' | 'actualites'
   const collections: PrerenderCollection[] = actualitesEnabled
-    ? ['docs', 'actualites', 'evenements']
-    : ['docs', 'evenements']
+    ? ['docs', 'actualites']
+    : ['docs']
   const pages = await Promise.all(
     collections.map(collection => queryCollection(collection).select('path').all())
   )

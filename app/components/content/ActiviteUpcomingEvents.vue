@@ -12,7 +12,7 @@ defineProps<{
     <USeparator />
 
     <h2 class="text-lg font-semibold text-highlighted">
-      Prochain événement
+      Prochaine actualité
     </h2>
 
     <EditorialListCard
@@ -22,11 +22,11 @@ defineProps<{
     />
 
     <UButton
-      :to="{ path: '/evenements', query: { activite } }"
+      :to="{ path: '/actualites', query: { activite } }"
       variant="subtle"
       trailing-icon="i-lucide-arrow-right"
     >
-      Voir tous les événements
+      Voir toutes les actualités
     </UButton>
   </div>
 </template>

@@ -6,9 +6,8 @@ import { getNavOrder } from '~/utils/content-collections'
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 const route = useRoute()
 const { header } = useAppConfig()
-const { actualitesEnabled } = useSiteFeatures()
 
-const navOrder = computed(() => getNavOrder(actualitesEnabled))
+const navOrder = computed(() => getNavOrder())
 
 function isNavItemActive(path: string) {
   if (route.path === path) return true

@@ -16,12 +16,8 @@ useSeoMeta({
   description: 'We are sorry but this page could not be found.'
 })
 
-const { actualitesEnabled } = useSiteFeatures()
-
 const { data: navigation } = await useAsyncData('navigation', () => queryMergedNavigation())
-const visibleNavigation = computed(() =>
-  filterNavigationByFeatures(navigation.value ?? [], actualitesEnabled)
-)
+const visibleNavigation = computed(() => navigation.value ?? [])
 const { data: files } = useLazyAsyncData('search', () => queryMergedSearchSections(), {
   server: false
 })

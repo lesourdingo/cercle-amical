@@ -1,7 +1,6 @@
 export default defineAppConfig({
-  /** Mettre `actualites: true` et `:landing-news` dans content/index.md pour réafficher la section Actualités. */
   features: {
-    actualites: false
+    actualites: true
   },
   ui: {
     colors: {

@@ -70,16 +70,11 @@ export default defineContentConfig({
       source: '1.actualites/**/*',
       schema: editorialPageSchema
     }),
-    evenements: defineCollection({
-      type: 'page',
-      source: '3.evenements/**/*',
-      schema: editorialPageSchema
-    }),
     docs: defineCollection({
       type: 'page',
       source: {
         include: '**',
-        exclude: ['index.md', '1.actualites/**', '3.evenements/**']
+        exclude: ['index.md', '1.actualites/**']
       },
       schema: z.object({
         title: property(z.string()).editor(studioEditor({

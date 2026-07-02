@@ -7,9 +7,6 @@ function collectionForPath(path: string): keyof Collections {
   if (path === '/actualites' || path.startsWith('/actualites/')) {
     return 'actualites'
   }
-  if (path === '/evenements' || path.startsWith('/evenements/')) {
-    return 'evenements'
-  }
   return 'docs'
 }
 

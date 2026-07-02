@@ -8,18 +8,22 @@ const { data: news } = await useAsyncData('landing-news', () => {
 
   return queryCollection('actualites')
     .where('path', 'LIKE', '/actualites/%')
+    .where('date', '>=', getTodayLocalISO())
     .select('path', 'title', 'description', 'date', 'activite')
-    .order('date', 'DESC')
+    .order('date', 'ASC')
     .limit(3)
     .all()
 })
 
-const filteredNews = computed(() =>
-  (news.value ?? []).filter(article =>
+const filteredNews = computed(() => {
+  const upcoming = news.value?.filter(article =>
     !article.path.endsWith('/index')
     && !article.path.includes('.navigation')
+    && isUpcomingByDate(article.date)
   )
-)
+
+  return upcoming ? sortActualitesByDate(upcoming) : []
+})
 
 function formatDate(dateValue: string | Date | undefined): string {
   if (!dateValue) return ''
@@ -36,7 +40,7 @@ function formatDate(dateValue: string | Date | undefined): string {
 <template>
   <UPageSection
     v-if="actualitesEnabled"
-    title="Dernières Actualités"
+    title="Actualités à venir"
   >
     <template #body>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -49,7 +53,7 @@ function formatDate(dateValue: string | Date | undefined): string {
             <div class="flex items-start gap-3">
               <EditorialActiviteIcon
                 :item="article"
-                fallback-icon="i-lucide-newspaper"
+                fallback-icon="i-lucide-calendar"
                 size="sm"
               />
               <div class="space-y-2 min-w-0 flex-1">
@@ -82,7 +86,7 @@ function formatDate(dateValue: string | Date | undefined): string {
               :to="article.path"
               class="text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center gap-1"
             >
-              Lire la suite
+              En savoir plus
               <UIcon name="i-lucide-arrow-right" />
             </ULink>
           </template>
