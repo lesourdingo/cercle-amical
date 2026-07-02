@@ -1,15 +1,5 @@
 <script setup lang="ts">
-import type { BulletinPdf } from '~/utils/media'
-
-const { data: bulletin } = await useAsyncData('bulletin-adhesion', async () => {
-  try {
-    return await $fetch<BulletinPdf | null>('/api/bulletin-adhesion')
-  } catch {
-    return null
-  }
-}, {
-  default: () => null
-})
+const { data: bulletin } = useAdhesionBulletin()
 </script>
 
 <template>

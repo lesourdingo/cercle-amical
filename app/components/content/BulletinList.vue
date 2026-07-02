@@ -1,20 +1,10 @@
 <script setup lang="ts">
-import type { BulletinPdf } from '~/utils/media'
-
 function pdfFilename(url: string): string {
   const segment = url.split('/').pop() ?? 'bulletin.pdf'
   return decodeURIComponent(segment)
 }
 
-const { data: bulletins } = await useAsyncData('bulletin-list', async () => {
-  try {
-    return await $fetch<BulletinPdf[]>('/api/bulletins')
-  } catch {
-    return [] as BulletinPdf[]
-  }
-}, {
-  default: () => [] as BulletinPdf[]
-})
+const { data: bulletins, pending } = useBulletinList()
 </script>
 
 <template>
@@ -59,7 +49,14 @@ const { data: bulletins } = await useAsyncData('bulletin-list', async () => {
     </div>
 
     <p
-      v-if="!bulletins?.length"
+      v-if="pending"
+      class="text-muted"
+    >
+      Chargement des bulletins…
+    </p>
+
+    <p
+      v-else-if="!bulletins?.length"
       class="text-muted"
     >
       Aucun bulletin disponible pour le moment.
