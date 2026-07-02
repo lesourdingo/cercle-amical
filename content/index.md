@@ -12,16 +12,16 @@ links:
     trailingIcon: i-lucide-arrow-right
     size: xl
   - label: Nous contacter
-    to: /informations
+    to: /presentation-du-club
     color: neutral
     variant: outline
     size: xl
     icon: i-lucide-info
-description: Une association conviviale à Saint Gildas de Rhuys proposant des
+description: Une association conviviale de Saint Gildas de Rhuys qui propose des
   activités variées, des événements réguliers et des moments de partage entre
-  amis.
-title: Le Cercle Amical
+  amis, le tout dans la bonne humeur
 orientation: horizontal
+title: Le Cercle Amical
 ---
 :landing-hero-logo
 ::
@@ -34,7 +34,7 @@ orientation: horizontal
 ---
 links:
   - label: Adhérer maintenant
-    to: /informations
+    to: /presentation-du-club
     trailingIcon: i-lucide-arrow-right
   - label: Voir tous les événements
     to: /evenements

@@ -20,7 +20,7 @@ export const ACTIVITE_LABELS: Record<ActiviteSlug, string> = {
   'petanque': 'Pétanque',
   'boule-bretonne': 'Boule bretonne',
   'loto': 'Loto',
-  'repas': 'Repas & convivialité',
+  'repas': 'Repas/animations',
   'sorties': 'Sorties',
   'voyages': 'Voyages',
   'association': 'Vie de l\'association',

@@ -17,6 +17,10 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  ui: {
+    colorMode: false
+  },
+
   content: {
     // Node 22+ built-in SQLite (évite les soucis better-sqlite3 en dev local)
     experimental: {
@@ -45,7 +49,7 @@ export default defineNuxtConfig({
     '/actualites/**': { prerender: true },
     '/evenements/**': { prerender: true },
     '/activites/**': { prerender: true },
-    '/informations/**': { prerender: true },
+    '/presentation-du-club/**': { prerender: true },
     '/admin/**': { prerender: false }
   },
 
@@ -122,10 +126,10 @@ export default defineNuxtConfig({
         ]
       },
       {
-        title: 'Informations',
+        title: 'Présentation du club',
         contentCollection: 'docs',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/informations%' }
+          { field: 'path', operator: 'LIKE', value: '/presentation-du-club%' }
         ]
       }
     ]

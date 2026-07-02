@@ -5,7 +5,8 @@ export default defineAppConfig({
   },
   ui: {
     colors: {
-      primary: 'blue',
+      primary: 'cyan',
+      secondary: 'yellow',
       neutral: 'neutral'
     },
     footer: {
@@ -34,10 +35,9 @@ export default defineAppConfig({
     logo: {
       alt: 'Cercle Amical',
       light: '/logo.png',
-      dark: '/logo.png',
       hero: '/logo-big.png'
     },
-    colorMode: true
+    colorMode: false
   },
   footer: {
     credits: `Built with Nuxt UI • © ${new Date().getFullYear()}`,

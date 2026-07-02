@@ -98,9 +98,6 @@ const navItems = computed<NavigationMenuItem[]>(() => {
       class="hidden lg:flex"
     />
 
-    <template #right>
-      <UColorModeButton v-if="header?.colorMode" />
-    </template>
 
     <template #body>
       <UContentNavigation

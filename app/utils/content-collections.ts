@@ -4,10 +4,10 @@ import type { ActiviteSlug } from '~/utils/activites'
 export const CONTENT_COLLECTIONS = ['actualites', 'evenements', 'docs'] as const
 export type ContentCollectionName = typeof CONTENT_COLLECTIONS[number]
 
-export const NAV_ORDER = ['/actualites', '/evenements', '/activites', '/informations'] as const
+export const NAV_ORDER = ['/actualites', '/evenements', '/activites', '/presentation-du-club'] as const
 
 /** Sections sans sous-menu dans la barre de navigation (évite le bouton chevron Nuxt UI). */
-export const NAV_WITHOUT_CHILDREN = ['/actualites', '/evenements', '/informations'] as const
+export const NAV_WITHOUT_CHILDREN = ['/actualites', '/evenements', '/presentation-du-club'] as const
 
 export function sanitizeNavigationItems(items: ContentNavigationItem[]): ContentNavigationItem[] {
   return items.map((item) => {
