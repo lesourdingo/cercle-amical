@@ -56,15 +56,15 @@ const navItems = computed<NavigationMenuItem[]>(() => {
     :to="header?.to || '/'"
   >
     <template
-      v-if="header?.logo?.dark || header?.logo?.light || header?.title"
+      v-if="header?.logo?.light || header?.title"
       #title
     >
       <div
-        v-if="header?.logo?.dark || header?.logo?.light"
+        v-if="header?.logo?.light"
         class="flex items-center gap-2.5"
       >
         <img
-          :src="header?.logo?.light || header?.logo?.dark"
+          :src="header?.logo?.light"
           alt=""
           aria-hidden="true"
           class="h-10 w-auto shrink-0"

@@ -4,7 +4,6 @@ const { header } = useAppConfig()
 const logoSrc = computed(() =>
   header?.logo?.hero
   || header?.logo?.light
-  || header?.logo?.dark
 )
 </script>
 
