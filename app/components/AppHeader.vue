@@ -70,7 +70,7 @@ const navItems = computed<NavigationMenuItem[]>(() => {
           class="h-10 w-auto shrink-0"
           width="40"
           height="40"
-        />
+        >
         <span
           v-if="header?.title"
           class="font-semibold text-highlighted"
@@ -97,7 +97,6 @@ const navItems = computed<NavigationMenuItem[]>(() => {
       :items="navItems"
       class="hidden lg:flex"
     />
-
 
     <template #body>
       <UContentNavigation

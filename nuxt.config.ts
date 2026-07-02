@@ -17,10 +17,6 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  ui: {
-    colorMode: false
-  },
-
   content: {
     // Node 22+ built-in SQLite (évite les soucis better-sqlite3 en dev local)
     experimental: {
@@ -33,6 +29,10 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+
+  ui: {
+    colorMode: false
   },
 
   runtimeConfig: {

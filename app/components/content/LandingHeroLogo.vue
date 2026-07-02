@@ -16,5 +16,5 @@ const logoSrc = computed(() =>
     class="mx-auto w-full max-w-64 sm:max-w-72 lg:max-w-80"
     width="320"
     height="320"
-  />
+  >
 </template>
