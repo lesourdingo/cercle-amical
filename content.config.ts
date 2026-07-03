@@ -39,7 +39,7 @@ const editorialPageSchema = z.object({
     label: 'RÃ©sumÃ©',
     description: 'Court texte affichÃ© sous le titre et dans les cartes'
   })),
-  date: property(z.date()).editor(studioEditor({
+  date: property(z.iso.date()).editor(studioEditor({
     label: 'Date',
     description: 'Date de publication (actualitÃ©s) ou de lâ€™Ã©vÃ©nement'
   })).optional(),
