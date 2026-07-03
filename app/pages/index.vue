@@ -4,8 +4,10 @@ if (!page.value?.hero || !page.value?.cta) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const title = page.value.seo?.title
-const description = page.value.seo?.description
+const landing = page.value
+
+const title = landing.seo?.title
+const description = landing.seo?.description
 
 useSeoMeta({
   titleTemplate: '',
@@ -22,25 +24,27 @@ defineOgImageComponent('Docs', {
 </script>
 
 <template>
-  <UPageHero
-    :title="page.hero.title"
-    :description="page.hero.description"
-    orientation="horizontal"
-  >
-    <LandingHeroLogo />
+  <div>
+    <UPageHero
+      :title="landing.hero.title"
+      :description="landing.hero.description"
+      orientation="horizontal"
+    >
+      <LandingHeroLogo />
 
-    <template #footer>
-      <LandingHeroFooter />
-    </template>
-  </UPageHero>
+      <template #footer>
+        <LandingHeroFooter />
+      </template>
+    </UPageHero>
 
-  <LandingNews />
+    <LandingNews />
 
-  <LandingActivites />
+    <LandingActivites />
 
-  <UPageSection
-    :title="page.cta.title"
-    :description="page.cta.description"
-    :links="page.cta.links"
-  />
+    <UPageSection
+      :title="landing.cta.title"
+      :description="landing.cta.description"
+      :links="landing.cta.links"
+    />
+  </div>
 </template>
