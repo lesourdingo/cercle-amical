@@ -6,17 +6,16 @@ seo:
 
 ::u-page-hero
 ---
-links:
-  - label: Découvrir nos activités
-    to: /activites
-    trailingIcon: i-lucide-arrow-right
-    size: xl
 description: Une association conviviale de Saint Gildas de Rhuys qui propose des
   activités variées, des événements réguliers et des moments de partage entre
   amis, le tout dans la bonne humeur
 orientation: horizontal
 title: Le Cercle Amical
 ---
+#footer
+:landing-hero-footer
+
+#default
 :landing-hero-logo
 ::
 
