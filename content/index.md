@@ -12,10 +12,11 @@ description: Une association conviviale de Saint Gildas de Rhuys qui propose des
 orientation: horizontal
 title: Le Cercle Amical
 ---
-:landing-hero-logo
-
 #footer
 :landing-hero-footer
+
+#default
+:landing-hero-logo
 ::
 
 :landing-news
