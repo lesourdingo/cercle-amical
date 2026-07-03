@@ -24,12 +24,12 @@ title: Le Cercle Amical
 
 ::u-page-section
 ---
-description: Devenez membre et participez à la vie de notre association. Tarifs
-  avantageux et nombreux avantages vous attendent.
 links:
   - label: Adhérer maintenant
     to: /presentation-du-club
     trailingIcon: i-lucide-arrow-right
+description: Devenez membre et participez à la vie de notre association. Tarifs
+  avantageux et nombreux avantages vous attendent.
 title: Rejoignez Le Cercle Amical
 ---
 ::
