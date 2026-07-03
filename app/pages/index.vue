@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: page } = await useAsyncData('index', () => queryCollection('landing').path('/').first())
-if (!page.value) {
+if (!page.value?.hero || !page.value?.cta) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
@@ -22,9 +22,25 @@ defineOgImageComponent('Docs', {
 </script>
 
 <template>
-  <ContentRenderer
-    v-if="page"
-    :value="page"
-    :prose="false"
+  <UPageHero
+    :title="page.hero.title"
+    :description="page.hero.description"
+    orientation="horizontal"
+  >
+    <LandingHeroLogo />
+
+    <template #footer>
+      <LandingHeroFooter />
+    </template>
+  </UPageHero>
+
+  <LandingNews />
+
+  <LandingActivites />
+
+  <UPageSection
+    :title="page.cta.title"
+    :description="page.cta.description"
+    :links="page.cta.links"
   />
 </template>

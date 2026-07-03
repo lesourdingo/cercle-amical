@@ -24,9 +24,43 @@ const pageLinksSchema = z.array(z.object({
     iconLibraries: ['lucide', 'simple-icons'],
     label: 'IcÃ´ne'
   })),
+  trailingIcon: property(z.string()).editor(studioEditor({
+    input: 'icon',
+    iconLibraries: ['lucide', 'simple-icons'],
+    label: 'IcÃ´ne de fin'
+  })).optional(),
   to: property(z.string()).editor(studioEditor({ label: 'Lien', description: 'Chemin interne ou URL' })),
   target: z.string().optional()
 })).optional()
+
+const landingPageSchema = z.object({
+  seo: property(z.object({
+    title: z.string().optional(),
+    description: z.string().optional()
+  }).optional()).editor(studioEditor({
+    label: 'SEO',
+    description: 'Titre et description pour les moteurs de recherche'
+  })),
+  hero: property(z.object({
+    title: property(z.string()).editor(studioEditor({
+      label: 'Titre',
+      description: 'Titre principal de la page d\'accueil'
+    })),
+    description: property(z.string()).editor(studioEditor({
+      input: 'textarea',
+      label: 'Description',
+      description: 'Texte affichÃ© sous le titre dans la banniÃ¨re'
+    }))
+  })).editor(studioEditor({ label: 'BanniÃ¨re d\'accueil' })),
+  cta: property(z.object({
+    title: property(z.string()).editor(studioEditor({ label: 'Titre' })),
+    description: property(z.string()).editor(studioEditor({
+      input: 'textarea',
+      label: 'Description'
+    })),
+    links: pageLinksSchema
+  })).editor(studioEditor({ label: 'Appel Ã  adhÃ©sion' }))
+})
 
 /** SchÃ©ma partagÃ© pour les articles et pages dâ€™index (formulaire Studio). */
 const editorialPageSchema = z.object({
@@ -63,7 +97,8 @@ export default defineContentConfig({
   collections: {
     landing: defineCollection({
       type: 'page',
-      source: 'index.md'
+      source: 'index.md',
+      schema: landingPageSchema
     }),
     actualites: defineCollection({
       type: 'page',
