@@ -25,6 +25,13 @@ export default defineAppConfig({
       slots: {
         container: 'flex flex-col lg:grid py-6 sm:py-10 lg:py-14 gap-6 sm:gap-10'
       }
+    },
+    prose: {
+      img: {
+        slots: {
+          base: 'rounded-md max-w-md mx-auto w-auto h-auto'
+        }
+      }
     }
   },
   seo: {
