@@ -29,7 +29,7 @@ export default defineAppConfig({
     prose: {
       img: {
         slots: {
-          base: 'rounded-md max-w-md mx-auto w-auto h-auto'
+          base: 'rounded-md max-w-md max-h-lg mx-auto w-auto h-auto object-contain'
         }
       }
     }
