@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://cercle-amical.pages.dev',
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://cercle-amical.fr',
     name: 'Cercle Amical',
     description: 'Association conviviale de Saint Gildas de Rhuys depuis 1983.',
     defaultLocale: 'fr'
@@ -106,7 +106,7 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: process.env.NUXT_PUBLIC_SITE_URL || 'https://cercle-amical.pages.dev',
+    domain: process.env.NUXT_PUBLIC_SITE_URL || 'https://cercle-amical.fr',
     title: 'Cercle Amical',
     description: 'Site du Cercle Amical de Saint Gildas de Rhuys.',
     full: {
@@ -158,7 +158,7 @@ export default defineNuxtConfig({
     identity: {
       type: 'Organization',
       name: 'Cercle Amical',
-      url: process.env.NUXT_PUBLIC_SITE_URL || 'https://cercle-amical.pages.dev',
+      url: process.env.NUXT_PUBLIC_SITE_URL || 'https://cercle-amical.fr',
       logo: '/logo.png'
     }
   },
