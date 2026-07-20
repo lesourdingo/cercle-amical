@@ -1,4 +1,5 @@
 import { defineContentConfig, defineCollection, property } from '@nuxt/content'
+import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
 import { z } from 'zod'
 
 import { ACTIVITE_SLUGS } from './app/utils/activites'
@@ -41,6 +42,7 @@ const landingPageSchema = z.object({
     label: 'SEO',
     description: 'Titre et description pour les moteurs de recherche'
   })),
+  sitemap: defineSitemapSchema(),
   hero: property(z.object({
     title: property(z.string()).editor(studioEditor({
       label: 'Titre',
@@ -90,7 +92,8 @@ const editorialPageSchema = z.object({
   seo: property(z.object({
     title: z.string().optional(),
     description: z.string().optional()
-  }).optional()).editor(studioEditor({ hidden: true }))
+  }).optional()).editor(studioEditor({ hidden: true })),
+  sitemap: defineSitemapSchema()
 })
 
 export default defineContentConfig({
@@ -127,7 +130,8 @@ export default defineContentConfig({
           description: 'Image affichÃ©e sur la carte de lâ€™activitÃ©'
         })).optional(),
         date: z.string().optional(),
-        links: pageLinksSchema
+        links: pageLinksSchema,
+        sitemap: defineSitemapSchema()
       })
     })
   }

@@ -5,8 +5,9 @@ export default defineNuxtConfig({
     '@nuxthub/core',
     '@nuxt/image',
     '@nuxt/ui',
+    // Sitemap must load before @nuxt/content for Content v3 integration
+    '@nuxtjs/seo',
     '@nuxt/content',
-    'nuxt-og-image',
     'nuxt-llms',
     'nuxt-studio'
   ],
@@ -16,6 +17,13 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://cercle-amical.pages.dev',
+    name: 'Cercle Amical',
+    description: 'Association conviviale de Saint Gildas de Rhuys depuis 1983.',
+    defaultLocale: 'fr'
+  },
 
   content: {
     // Node 22+ built-in SQLite (évite les soucis better-sqlite3 en dev local)
@@ -39,7 +47,6 @@ export default defineNuxtConfig({
     // Alternative to STUDIO_GOOGLE_MODERATORS — set NUXT_STUDIO_GOOGLE_MODERATORS on Cloudflare
     studioGoogleModerators: '',
     public: {
-      siteUrl: '',
       mediaUrl: process.env.S3_PUBLIC_URL || 'https://images.cercle-amical.fr'
     }
   },
@@ -50,7 +57,10 @@ export default defineNuxtConfig({
     '/activites/**': { prerender: true },
     '/bulletin-d-information/**': { prerender: true },
     '/presentation-du-club/**': { prerender: true },
-    '/admin/**': { prerender: false }
+    '/admin/**': {
+      prerender: false,
+      robots: false
+    }
   },
 
   compatibilityDate: '2025-12-12',
@@ -138,6 +148,23 @@ export default defineNuxtConfig({
   // Optimize OG image generation for memory usage
   ogImage: {
     runtimeCacheStorage: false
+  },
+
+  robots: {
+    disallow: ['/admin']
+  },
+
+  schemaOrg: {
+    identity: {
+      type: 'Organization',
+      name: 'Cercle Amical',
+      url: process.env.NUXT_PUBLIC_SITE_URL || 'https://cercle-amical.pages.dev',
+      logo: '/logo.png'
+    }
+  },
+
+  sitemap: {
+    exclude: ['/admin/**']
   },
 
   studio: {
