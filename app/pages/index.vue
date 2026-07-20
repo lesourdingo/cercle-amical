@@ -17,7 +17,7 @@ useSeoMeta({
   ogDescription: description
 })
 
-defineOgImageComponent('Docs', {
+defineOgImageComponent('Docs.satori', {
   title,
   description
 })

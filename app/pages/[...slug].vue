@@ -67,7 +67,7 @@ const { data: galleryImages } = activiteSlug
   ? await useActiviteGallery(activiteSlug)
   : { data: ref([]) }
 
-defineOgImageComponent('Docs', {
+defineOgImageComponent('Docs.satori', {
   headline: headline.value
 })
 </script>
