@@ -6,11 +6,11 @@ const props = withDefaults(defineProps<{
 })
 
 const saintGildasClass = computed(() =>
-  props.size === 'hero' ? 'h-auto w-16 sm:w-20' : 'h-auto w-28'
+  props.size === 'hero' ? 'h-auto w-24 sm:w-28' : 'h-auto w-36'
 )
 
 const morbihanClass = computed(() =>
-  props.size === 'hero' ? 'h-auto w-28 sm:w-32' : 'h-auto w-28'
+  props.size === 'hero' ? 'h-auto w-52 sm:w-56' : 'h-auto w-52'
 )
 </script>
 
