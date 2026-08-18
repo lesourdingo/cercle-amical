@@ -1,7 +1,7 @@
 ---
 title: Présentation du club
-date: 2025-01-10
 description: Histoire, activités, gouvernance et adhésion au Cercle Amical de Saint Gildas de Rhuys
+date: 2025-01-10
 navigation:
   icon: i-lucide-heart-handshake
 author: Secrétariat
@@ -80,7 +80,7 @@ En devenant membre, vous bénéficiez de :
 ### Comment adhérer
 
 1. Téléchargez le :adhesion-bulletin-link
-2. Remplissez-le et envoyez-le à [cercle.amical.saint.gildas@gmail.com](mailto:cercle.amical.saint.gildas@gmail.com) pour finaliser votre inscription
+2. Remplissez-le et envoyez-le à <cercle.amical.saint.gildas@gmail.com> pour finaliser votre inscription
 3. Effectuez le paiement en espèce, chèque ou virement
 
 Pour toute question, n'hésitez pas à nous contacter !
@@ -100,4 +100,4 @@ L'association est animée par un **Conseil d'Administration** comprenant au moin
 
 ## Contact
 
-- **Email** : [cercle.amical.saint.gildas@gmail.com](mailto:cercle.amical.saint.gildas@gmail.com)
+- **Email** : <cercle.amical.saint.gildas@gmail.com>

@@ -5,8 +5,4 @@ navigation:
   icon: i-lucide-calendar-clock
 ---
 
-::content-list
----
-path: /activites
----
-::
+:content-list{path="/activites"}

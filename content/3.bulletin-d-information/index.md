@@ -7,5 +7,4 @@ navigation:
 
 Le **bulletin d'information** du Cercle Amical est publié **deux fois par an** (janvier et juillet). Retrouvez ci-dessous les éditions disponibles au format PDF.
 
-::bulletin-list
-::
+:bulletin-list
