@@ -18,6 +18,8 @@ function studioEditor<T extends z.ZodTypeAny>(options: StudioEditorOptions) {
   return options as Parameters<ReturnType<typeof property<T>>['editor']>[0]
 }
 
+const hiddenSitemapSchema = property(defineSitemapSchema()).editor(studioEditor({ hidden: true }))
+
 const pageLinksSchema = z.array(z.object({
   label: property(z.string()).editor(studioEditor({ label: 'LibellÃ©' })),
   icon: property(z.string()).editor(studioEditor({
@@ -42,7 +44,7 @@ const landingPageSchema = z.object({
     label: 'SEO',
     description: 'Titre et description pour les moteurs de recherche'
   })),
-  sitemap: defineSitemapSchema(),
+  sitemap: hiddenSitemapSchema,
   hero: property(z.object({
     title: property(z.string()).editor(studioEditor({
       label: 'Titre',
@@ -93,7 +95,7 @@ const editorialPageSchema = z.object({
     title: z.string().optional(),
     description: z.string().optional()
   }).optional()).editor(studioEditor({ hidden: true })),
-  sitemap: defineSitemapSchema()
+  sitemap: hiddenSitemapSchema
 })
 
 export default defineContentConfig({
@@ -131,7 +133,7 @@ export default defineContentConfig({
         })).optional(),
         date: z.string().optional(),
         links: pageLinksSchema,
-        sitemap: defineSitemapSchema()
+        sitemap: hiddenSitemapSchema
       })
     })
   }
