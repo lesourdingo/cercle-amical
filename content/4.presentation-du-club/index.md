@@ -1,7 +1,7 @@
 ---
 title: Présentation du club
-description: Histoire, activités, gouvernance et adhésion au Cercle Amical de Saint Gildas de Rhuys
 date: 2025-01-10
+description: Histoire, activités, gouvernance et adhésion au Cercle Amical de Saint Gildas de Rhuys
 navigation:
   icon: i-lucide-heart-handshake
 author: Secrétariat
