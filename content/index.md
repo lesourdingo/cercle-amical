@@ -1,6 +1,6 @@
 ---
 alerte:
-  enabled: true
+  enabled: false
   title: Nouveau site
   description: ""
   color: normal
