@@ -2,7 +2,13 @@
 import type { ActiviteSlug, EditorialIconItem } from '~/utils/activites'
 
 defineProps<{
-  event: EditorialIconItem & { path: string, title?: string, description?: string, date?: string | Date }
+  event: EditorialIconItem & {
+    path: string
+    title?: string
+    description?: string
+    date?: string | Date
+    statut?: string
+  }
   activite: ActiviteSlug
 }>()
 </script>

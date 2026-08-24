@@ -67,8 +67,8 @@ export default defineAppConfig({
         label: 'Bulletin d\'information',
         to: '/bulletin-d-information'
       }, {
-        label: 'Présentation du club',
-        to: '/presentation-du-club'
+        label: 'Présentation du cercle',
+        to: '/presentation-du-cercle'
       }]
     }, {
       label: 'Contact',
@@ -77,8 +77,8 @@ export default defineAppConfig({
         to: 'mailto:cercle.amical.saint.gildas@gmail.com',
         icon: 'i-lucide-mail'
       }, {
-        label: 'Adhérer au club',
-        to: '/presentation-du-club',
+        label: 'Adhérer au cercle',
+        to: '/presentation-du-cercle',
         icon: 'i-lucide-user-plus'
       }, {
         label: 'Saint Gildas de Rhuys (56730)',

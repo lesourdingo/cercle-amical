@@ -17,7 +17,7 @@ useSeoMeta({
   ogDescription: description
 })
 
-defineOgImageComponent('Docs.satori', {
+defineOgImage('Docs.satori', {
   title,
   description
 })
@@ -36,6 +36,14 @@ defineOgImageComponent('Docs.satori', {
         <LandingHeroFooter />
       </template>
     </UPageHero>
+
+    <LandingAlert
+      v-if="landing.alerte?.enabled && landing.alerte?.title"
+      :title="landing.alerte.title"
+      :description="landing.alerte.description"
+      :color="landing.alerte.color"
+      :link="landing.alerte.link"
+    />
 
     <LandingNews />
 

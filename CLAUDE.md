@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Cercle Amical is a community website for a French social club in Saint Gildas de Rhuys. It's built with Nuxt 4 and uses Nuxt Content for content management with a static deployment to Cloudflare Pages.
+Cercle Amical is a community website for the Cercle Amical of Saint Gildas de Rhuys. It's built with Nuxt 4 and uses Nuxt Content for content management with a static deployment to Cloudflare Pages.
 
 ## Commands
 
@@ -35,7 +35,7 @@ pnpm typecheck    # Run TypeScript type checking
 ### Content Structure
 Content is organized in `content/` with numbered prefixes for navigation ordering:
 - `1.actualites/` - News articles
-- `2.activites/` - Club activities (Belote, Tarot, Petanque, etc.)
+- `2.activites/` - Activities (Belote, Tarot, Petanque, etc.)
 - `3.evenements/` - Events and calendar
 - `4.informations/` - General information
 

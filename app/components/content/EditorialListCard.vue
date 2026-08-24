@@ -2,7 +2,13 @@
 import type { EditorialIconItem } from '~/utils/activites'
 
 defineProps<{
-  item: EditorialIconItem & { path: string, title?: string, description?: string, date?: string | Date }
+  item: EditorialIconItem & {
+    path: string
+    title?: string
+    description?: string
+    date?: string | Date
+    statut?: string
+  }
   linkLabel?: string
   fallbackIcon?: string
   muted?: boolean
@@ -30,8 +36,9 @@ function formatDate(date: string | Date | undefined): string {
       />
       <div class="flex flex-1 items-start justify-between gap-4 min-w-0">
         <div class="flex-1 min-w-0">
-          <h3 class="text-lg font-semibold text-highlighted">
-            {{ item.title }}
+          <h3 class="text-lg font-semibold text-highlighted flex items-center gap-2 flex-wrap">
+            <span>{{ item.title }}</span>
+            <ActualiteStatutBadge :statut="item.statut" />
           </h3>
           <p
             v-if="item.description"

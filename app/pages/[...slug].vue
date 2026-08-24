@@ -63,11 +63,16 @@ const { data: upcomingEvents } = activiteSlug
 
 const nextUpcomingEvent = computed(() => upcomingEvents.value?.[0])
 
+const pageStatut = computed(() => {
+  const current = page.value as { statut?: string } | null
+  return current?.statut
+})
+
 const { data: galleryImages } = activiteSlug
   ? await useActiviteGallery(activiteSlug)
   : { data: ref([]) }
 
-defineOgImageComponent('Docs.satori', {
+defineOgImage('Docs.satori', {
   headline: headline.value
 })
 </script>
@@ -83,12 +88,16 @@ defineOgImageComponent('Docs.satori', {
         v-if="showActiviteIcon"
         #title
       >
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 flex-wrap">
           <EditorialActiviteIcon
             :item="page"
             :fallback-icon="pageFallbackIcon"
           />
           <span>{{ page.title }}</span>
+          <ActualiteStatutBadge
+            :statut="pageStatut"
+            size="lg"
+          />
         </div>
       </template>
       <template #links>

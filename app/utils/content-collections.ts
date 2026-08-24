@@ -4,10 +4,10 @@ import type { ActiviteSlug } from '~/utils/activites'
 export const CONTENT_COLLECTIONS = ['actualites', 'docs'] as const
 export type ContentCollectionName = typeof CONTENT_COLLECTIONS[number]
 
-export const NAV_ORDER = ['/actualites', '/activites', '/bulletin-d-information', '/presentation-du-club'] as const
+export const NAV_ORDER = ['/actualites', '/activites', '/bulletin-d-information', '/presentation-du-cercle'] as const
 
 /** Sections sans sous-menu dans la barre de navigation (évite le bouton chevron Nuxt UI). */
-export const NAV_WITHOUT_CHILDREN = ['/actualites', '/bulletin-d-information', '/presentation-du-club'] as const
+export const NAV_WITHOUT_CHILDREN = ['/actualites', '/bulletin-d-information', '/presentation-du-cercle'] as const
 
 export function sanitizeNavigationItems(items: ContentNavigationItem[]): ContentNavigationItem[] {
   return items.map((item) => {
@@ -121,7 +121,7 @@ export async function queryUpcomingActualitesForActivite(activite: ActiviteSlug)
     .where('path', 'LIKE', '/actualites/%')
     .where('activite', '=', activite)
     .where('date', '>=', getTodayLocalISO())
-    .select('path', 'title', 'description', 'date', 'activite')
+    .select('path', 'title', 'description', 'date', 'activite', 'statut')
     .order('date', 'ASC')
     .all()
 

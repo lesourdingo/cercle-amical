@@ -3,6 +3,7 @@ import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
 import { z } from 'zod'
 
 import { ACTIVITE_SLUGS } from './app/utils/activites'
+import { ACTUALITE_STATUTS } from './app/utils/actualite-statut'
 
 type StudioEditorOptions = {
   label?: string
@@ -37,13 +38,18 @@ const pageLinksSchema = z.array(z.object({
 })).optional()
 
 const landingPageSchema = z.object({
+  title: property(z.string().optional()).editor(studioEditor({ hidden: true })),
+  description: property(z.string().optional()).editor(studioEditor({ hidden: true })),
+  navigation: property(z.union([
+    z.literal(false),
+    z.object({
+      icon: z.string().optional()
+    })
+  ]).optional()).editor(studioEditor({ hidden: true })),
   seo: property(z.object({
     title: z.string().optional(),
     description: z.string().optional()
-  }).optional()).editor(studioEditor({
-    label: 'SEO',
-    description: 'Titre et description pour les moteurs de recherche'
-  })),
+  }).optional()).editor(studioEditor({ hidden: true })),
   sitemap: hiddenSitemapSchema,
   hero: property(z.object({
     title: property(z.string()).editor(studioEditor({
@@ -63,7 +69,36 @@ const landingPageSchema = z.object({
       label: 'Description'
     })),
     links: pageLinksSchema
-  })).editor(studioEditor({ label: 'Appel Ã  adhÃ©sion' }))
+  })).editor(studioEditor({ label: 'Appel Ã  adhÃ©sion' })),
+  alerte: property(z.object({
+    enabled: property(z.boolean().default(false)).editor(studioEditor({
+      label: 'Afficher l\'alerte',
+      description: 'Active l\'alerte sur la page d\'accueil'
+    })),
+    title: property(z.string()).editor(studioEditor({
+      label: 'Titre',
+      description: 'Titre court de l\'alerte'
+    })),
+    description: property(z.string()).editor(studioEditor({
+      input: 'textarea',
+      label: 'Message',
+      description: 'Texte détaillé de l\'alerte'
+    })),
+    color: property(z.enum(['normal', 'rouge']).default('normal')).editor(studioEditor({
+      label: 'Couleur',
+      description: 'normal ou rouge'
+    })),
+    link: property(z.object({
+      label: property(z.string()).editor(studioEditor({ label: 'Libellé' })),
+      to: property(z.string()).editor(studioEditor({
+        label: 'Lien',
+        description: 'Chemin interne ou URL'
+      }))
+    }).optional()).editor(studioEditor({
+      label: 'Lien',
+      description: 'Bouton optionnel « En savoir plus »'
+    }))
+  }).optional()).editor(studioEditor({ label: 'Alerte' }))
 })
 
 /** SchÃ©ma partagÃ© pour les articles et pages dâ€™index (formulaire Studio). */
@@ -85,6 +120,10 @@ const editorialPageSchema = z.object({
     label: 'ActivitÃ©',
     description: 'DÃ©termine lâ€™icÃ´ne affichÃ©e (identique Ã  celle de la page ActivitÃ© correspondante)'
   })).optional(),
+  statut: property(z.enum(ACTUALITE_STATUTS).default('ouvert')).editor(studioEditor({
+    label: 'Statut',
+    description: 'ouvert (pas de badge), complet (badge orange) ou annule (badge rouge)'
+  })),
   navigation: property(z.union([
     z.literal(false),
     z.object({

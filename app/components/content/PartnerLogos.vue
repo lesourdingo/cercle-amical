@@ -6,32 +6,32 @@ const props = withDefaults(defineProps<{
 })
 
 const saintGildasClass = computed(() =>
-  props.size === 'hero' ? 'h-auto w-24 sm:w-28' : 'h-auto w-36'
+  props.size === 'hero' ? 'h-auto w-32 sm:w-40' : 'h-auto w-44'
 )
 
 const morbihanClass = computed(() =>
-  props.size === 'hero' ? 'h-auto w-52 sm:w-56' : 'h-auto w-52'
+  props.size === 'hero' ? 'h-auto w-64 sm:w-72' : 'h-auto w-64'
 )
 </script>
 
 <template>
   <div
     class="not-prose flex flex-wrap items-center shrink-0"
-    :class="size === 'hero' ? 'gap-3 sm:gap-4' : 'gap-6 my-4'"
+    :class="size === 'hero' ? 'gap-4 sm:gap-6' : 'gap-8 my-4'"
   >
     <img
       src="/logo-saint-gildas.jpg"
       alt="Commune de Saint-Gildas-de-Rhuys"
       :class="saintGildasClass"
-      width="144"
-      height="144"
+      width="160"
+      height="160"
     >
     <img
       src="/Morbihan_logo2022_Departement_JPG.jpg"
       alt="Conseil départemental du Morbihan"
       :class="morbihanClass"
-      width="144"
-      height="144"
+      width="256"
+      height="82"
     >
   </div>
 </template>

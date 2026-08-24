@@ -9,7 +9,7 @@ const { data: news } = await useAsyncData('landing-news', () => {
   return queryCollection('actualites')
     .where('path', 'LIKE', '/actualites/%')
     .where('date', '>=', getTodayLocalISO())
-    .select('path', 'title', 'description', 'date', 'activite')
+    .select('path', 'title', 'description', 'date', 'activite', 'statut')
     .order('date', 'ASC')
     .limit(3)
     .all()
@@ -57,8 +57,9 @@ function formatDate(dateValue: string | Date | undefined): string {
                 size="sm"
               />
               <div class="space-y-2 min-w-0 flex-1">
-                <h3 class="text-lg font-semibold text-highlighted">
-                  {{ article.title }}
+                <h3 class="text-lg font-semibold text-highlighted flex items-center gap-2 flex-wrap">
+                  <span>{{ article.title }}</span>
+                  <ActualiteStatutBadge :statut="article.statut" />
                 </h3>
                 <p
                   v-if="article.date"

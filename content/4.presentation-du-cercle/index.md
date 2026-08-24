@@ -1,11 +1,11 @@
 ---
-title: Présentation du club
+title: Présentation du cercle
 date: 2025-01-10
 description: Histoire, activités, gouvernance et adhésion au Cercle Amical de Saint Gildas de Rhuys
 navigation:
   icon: i-lucide-heart-handshake
 author: Secrétariat
-category: Présentation du club
+category: Présentation du cercle
 ---
 
 ## Notre association
@@ -24,12 +24,12 @@ Les activités proposées sont également présentées en septembre au **forum d
 
 ### Activités hebdomadaires gratuites (réservées aux adhérents)
 
-- **Pétanque et boules bretonnes** : quatre après-midi chaque semaine, avec une trentaine de participants
+- **Pétanque et boule bretonne** : quatre après-midi chaque semaine, avec une trentaine de participants
 - **Belote et tarot** : deux après-midi chaque semaine, avec également une trentaine de participants
 
 ### Rendez-vous réguliers
 
-Environ **4 à 5 par an** : lotos, concours de belote, de tarot, de pétanque et de boules bretonnes.
+Environ **4 à 5 par an** : lotos, concours de belote, de tarot, de pétanque et de boule bretonne.
 
 ### Repas/animations
 
@@ -51,10 +51,13 @@ Consultez les pages [Activités](/activites) et [Actualités](/actualites) pour 
 
 ## Responsables des activités
 
-- **Repas/animations** : Eric DETUNE
+- **Responsable légal** : Alain DELHOMEL
+- **Responsable administratif** : Luc GENET
+- **Repas/animations** : Eric DETUNE, Luc GENET
 - **Loto** : Nicole VALLE
 - **Tarot / Belote** : Eric DETUNE
-- **Pétanque / Boules bretonnes** : Brigitte ROUXEL
+- **Pétanque** : Brigitte ROUXEL
+- **Boule bretonne** : Brigitte ROUXEL, Luc GENET
 - **Sorties / Voyages** : Danièle CHEVALIER
 
 ## Adhésion

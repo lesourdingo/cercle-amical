@@ -56,7 +56,9 @@ export default defineNuxtConfig({
     '/actualites/**': { prerender: true },
     '/activites/**': { prerender: true },
     '/bulletin-d-information/**': { prerender: true },
-    '/presentation-du-club/**': { prerender: true },
+    '/presentation-du-cercle/**': { prerender: true },
+    '/presentation-du-club': { redirect: { to: '/presentation-du-cercle', statusCode: 301 } },
+    '/presentation-du-club/**': { redirect: { to: '/presentation-du-cercle', statusCode: 301 } },
     '/admin/**': {
       prerender: false,
       robots: false
@@ -136,10 +138,10 @@ export default defineNuxtConfig({
         ]
       },
       {
-        title: 'Présentation du club',
+        title: 'Présentation du cercle',
         contentCollection: 'docs',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/presentation-du-club%' }
+          { field: 'path', operator: 'LIKE', value: '/presentation-du-cercle%' }
         ]
       }
     ]
