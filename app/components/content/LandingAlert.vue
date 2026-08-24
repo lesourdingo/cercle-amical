@@ -22,6 +22,13 @@ const icon = computed(() =>
   uiColor.value === 'error' ? 'i-lucide-circle-alert' : 'i-lucide-info'
 )
 
+const paragraphs = computed(() =>
+  (props.description ?? '')
+    .split(/\n+/)
+    .map(paragraph => paragraph.trim())
+    .filter(Boolean)
+)
+
 const actions = computed<ButtonProps[] | undefined>(() => {
   if (!props.link?.label || !props.link?.to) {
     return undefined
@@ -38,15 +45,27 @@ const actions = computed<ButtonProps[] | undefined>(() => {
 </script>
 
 <template>
-  <UContainer class="pt-6 sm:pt-8">
+  <UContainer>
     <UAlert
       :title="title"
-      :description="description"
       :icon="icon"
       :color="uiColor"
-      variant="subtle"
-      orientation="horizontal"
+      variant="soft"
       :actions="actions"
-    />
+    >
+      <template
+        v-if="paragraphs.length"
+        #description
+      >
+        <div class="space-y-2">
+          <p
+            v-for="(paragraph, index) in paragraphs"
+            :key="index"
+          >
+            {{ paragraph }}
+          </p>
+        </div>
+      </template>
+    </UAlert>
   </UContainer>
 </template>

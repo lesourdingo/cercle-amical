@@ -51,13 +51,12 @@ Consultez les pages [Activités](/activites) et [Actualités](/actualites) pour 
 
 ## Responsables des activités
 
-- **Responsable légal** : Alain DELHOMEL
-- **Responsable administratif** : Luc GENET
-- **Repas/animations** : Eric DETUNE, Luc GENET
+- **Représentant légal** : Alain DELHOMEL (adjoint Joël HUBERSON)
+- **Représentante administrative** : Agnès CERSOY
+- **Repas/animations** : Eric DETUNE / Luc GENET
 - **Loto** : Nicole VALLE
 - **Tarot / Belote** : Eric DETUNE
-- **Pétanque** : Brigitte ROUXEL
-- **Boule bretonne** : Brigitte ROUXEL, Luc GENET
+- **Pétanque / Boules bretonnes** : Brigitte ROUXEL / Luc GENET
 - **Sorties / Voyages** : Danièle CHEVALIER
 
 ## Adhésion

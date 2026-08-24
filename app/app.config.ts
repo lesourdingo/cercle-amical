@@ -16,7 +16,7 @@ export default defineAppConfig({
     },
     pageHero: {
       slots: {
-        container: 'flex flex-col lg:grid py-12 sm:py-16 lg:py-20 gap-10 sm:gap-y-16',
+        container: 'flex flex-col lg:grid pt-12 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 lg:pb-8 gap-10 sm:gap-y-16',
         body: 'mt-6',
         footer: 'mt-6'
       }
