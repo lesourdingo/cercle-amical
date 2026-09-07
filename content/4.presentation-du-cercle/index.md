@@ -51,7 +51,7 @@ Consultez les pages [Activités](/activites) et [Actualités](/actualites) pour 
 
 ## Responsables des activités
 
-- **Représentant légal** : Alain DELHOMEL (adjoint Joël HUBERSON)
+- **Représentant légal** : Alain DELHOMEL / adjoint Joël HUBERSON
 - **Représentante administrative** : Agnès CERSOY
 - **Repas/animations** : Eric DETUNE / Luc GENET
 - **Loto** : Nicole VALLE
